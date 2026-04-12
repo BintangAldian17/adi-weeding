@@ -145,7 +145,7 @@ export default function Closing() {
   return (
     <section
       ref={rootRef}
-      className="relative h-[75vh] w-full overflow-hidden bg-primary text-secondary xl:h-[150vh]"
+      className="relative h-[90vh] w-full overflow-hidden bg-primary text-secondary xl:h-[150vh]"
     >
       <Image
         src="/images/side-frame.png"

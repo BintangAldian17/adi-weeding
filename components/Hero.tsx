@@ -5,15 +5,18 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useIsOpen } from "@/context/OpeningContext";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function Hero() {
   const rootRef = useRef<HTMLElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
+  const isOpen = useIsOpen();
 
   useGSAP(
     () => {
+      if (!isOpen) return;
       if (!textRef.current) return;
 
       const reduceMotion = window.matchMedia(
@@ -51,7 +54,7 @@ export default function Hero() {
         },
       });
     },
-    { scope: rootRef },
+    { scope: rootRef, dependencies: [isOpen] },
   );
 
   return (
@@ -162,7 +165,7 @@ export default function Hero() {
       <div className="absolute bottom-0 z-20 h-1/2 w-full bg-linear-to-t from-primary from-10% to-transparent" />
 
       <div className="relative z-0 h-full w-full overflow-hidden">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 md:scale-100 scale-125">
           <Image
             src="/images/hero2.png"
             alt="hero-bg"

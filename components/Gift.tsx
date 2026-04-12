@@ -137,6 +137,52 @@ export default function Gift() {
       ref={rootRef}
       className="w-full xl:min-h-screen min-h-[75vh] relative bg-secondary text-text-dark xl:rounded-t-[80px] rounded-t-[24px] xl:pb-[217px] pb-[172px] overflow-hidden"
     >
+      <div className="absolute xl:bottom-1/2 xl:translate-y-1/2 bottom-10 left-0 z-30">
+        <Image
+          src="/images/accent-flower.png"
+          alt="side-frame"
+          width={268}
+          height={425}
+          className="xl:translate-y-60 translate-y-16  relative z-10 -translate-x-10.5 xl:w-[268px] w-[71px] h-auto"
+        />
+        <Image
+          src="/images/accent-flower2.png"
+          alt="side-frame"
+          width={399}
+          height={220}
+          className="xl:translate-y-25 -translate-x-10 translate-y-7 xl:w-[399px] w-[107px] h-auto"
+        />
+        <Image
+          src="/images/accent-flower3.png"
+          alt="side-frame"
+          width={232}
+          height={288}
+          className="relative z-10 -translate-x-10 xl:w-[232px] w-[77px] h-auto rotate-y-180"
+        />
+      </div>
+      <div className="absolute xl:bottom-1/2 xl:translate-y-1/2 bottom-10 right-0 rotate-y-180">
+        <Image
+          src="/images/accent-flower.png"
+          alt="side-frame"
+          width={268}
+          height={425}
+          className="xl:translate-y-60 translate-y-16  relative z-10 -translate-x-10.5 xl:w-[268px] w-[71px] h-auto"
+        />
+        <Image
+          src="/images/accent-flower2.png"
+          alt="side-frame"
+          width={399}
+          height={220}
+          className="xl:translate-y-25 -translate-x-10 translate-y-7 xl:w-[399px] w-[107px] h-auto"
+        />
+        <Image
+          src="/images/accent-flower3.png"
+          alt="side-frame"
+          width={232}
+          height={288}
+          className="relative z-10 -translate-x-10 xl:w-[232px] w-[77px] h-auto rotate-y-180"
+        />
+      </div>
       <Image
         src="/images/bg-accent2.png"
         alt="bg"

@@ -1,11 +1,9 @@
-import Cover from "@/components/Cover";
-import Wrapper from "@/components/Wrapper";
+import Opening from "@/components/Opening";
 
 export default function Home() {
   return (
     <main className="w-full h-full bg-primary">
-      {/* <Cover /> */}
-      <Wrapper />
+      <Opening />
     </main>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import Hero from "./Hero";
 import Quote from "./Quote";
 import Couple from "./Couple";
@@ -6,8 +8,20 @@ import Gift from "./Gift";
 import Closing from "./Closing";
 import Event from "./Event";
 import Image from "next/image";
+import { useEffect } from "react";
+import { ScrollTrigger } from "gsap/all";
 
 export default function Wrapper() {
+  useEffect(() => {
+    // Refresh lagi setelah semua gambar load
+    const onLoad = () => ScrollTrigger.refresh();
+    if (document.readyState === "complete") {
+      onLoad();
+    } else {
+      window.addEventListener("load", onLoad);
+      return () => window.removeEventListener("load", onLoad);
+    }
+  }, []);
   return (
     <>
       <Hero />

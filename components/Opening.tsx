@@ -1,0 +1,55 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import Cover from "@/components/Cover";
+import Wrapper from "@/components/Wrapper";
+import { OpenContext } from "@/context/OpeningContext";
+import { ScrollTrigger } from "gsap/all";
+import SplashScreen from "./SplashScreen";
+
+export default function Opening() {
+  const [splashDone, setSplashDone] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSplashReady = useCallback(() => {
+    setSplashDone(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const handleOpen = useCallback(() => {
+    setIsOpen(true);
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 800);
+  }, []);
+
+  return (
+    <>
+      {!splashDone && <SplashScreen onReady={handleSplashReady} />}
+
+      {splashDone && !isOpen && <Cover onOpen={handleOpen} />}
+
+      <OpenContext.Provider value={isOpen}>
+        <div
+          className={`transition-opacity duration-700 ${
+            splashDone
+              ? "opacity-100"
+              : "opacity-0 pointer-events-none overflow-hidden h-screen max-h-screen"
+          }`}
+        >
+          <Wrapper />
+        </div>
+      </OpenContext.Provider>
+    </>
+  );
+}
