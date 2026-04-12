@@ -7,7 +7,7 @@ interface MusicPlayerProps {
   isPlaying: boolean;
 }
 
-const songs = ["/audio/gunslinger.mp3", "/audio/little-piece-of-heaven.mp3"];
+const songs = ["/audio/music1.mp3", "/audio/music2.mp3"];
 
 export default function MusicPlayer({
   isPlaying: initialPlayState,
