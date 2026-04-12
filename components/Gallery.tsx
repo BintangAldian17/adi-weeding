@@ -90,7 +90,7 @@ export default function Gallery() {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-[90vh] overflow-hidden bg-secondary text-text-dark xl:min-h-screen"
+      className="relative min-h-[90vh] pb-10 overflow-hidden bg-secondary text-text-dark xl:min-h-screen"
     >
       <Image
         src="/images/bg-accent2.png"

@@ -293,7 +293,7 @@ export default function Closing() {
           alt="hero-bg"
           width={105}
           height={101}
-          className="mt-20 h-auto w-[51px] will-change-transform xl:w-[105px]"
+          className="xl:mt-20 mt-10 h-auto w-[51px] will-change-transform xl:w-[105px]"
         />
 
         <div
@@ -309,7 +309,7 @@ export default function Closing() {
               Devi
             </span>
 
-            <span className="font-alegreya text-[32px] font-thin md:text-[64px]">
+            <span className="font-alegreya text-[32px] font-thin md:text-[64px] leading-none">
               &
             </span>
 
@@ -321,7 +321,7 @@ export default function Closing() {
 
         <div
           data-closing-date-wrap
-          className="mt-10 flex flex-col items-center justify-center gap-2 will-change-transform md:gap-4"
+          className="xl:mt-10 mt-2 flex flex-col items-center justify-center gap-2 will-change-transform md:gap-4"
         >
           <Image
             src="/images/mini-frame.png"
