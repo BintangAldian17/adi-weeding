@@ -23,10 +23,6 @@ export default function Wrapper() {
     }
   }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <>
       <Hero />

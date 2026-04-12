@@ -6,10 +6,15 @@ import Wrapper from "@/components/Wrapper";
 import { OpenContext } from "@/context/OpeningContext";
 import { ScrollTrigger } from "gsap/all";
 import SplashScreen from "./SplashScreen";
+import MusicPlayer from "./MusicPlayer";
+import { useScrollToTop } from "@/hooks/useScrollToTop";
 
 export default function Opening() {
+  useScrollToTop();
+
   const [splashDone, setSplashDone] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [shouldPlayMusic, setShouldPlayMusic] = useState(false);
 
   const handleSplashReady = useCallback(() => {
     setSplashDone(true);
@@ -28,6 +33,7 @@ export default function Opening() {
 
   const handleOpen = useCallback(() => {
     setIsOpen(true);
+    setShouldPlayMusic(true);
     setTimeout(() => {
       ScrollTrigger.refresh();
     }, 800);
@@ -50,6 +56,7 @@ export default function Opening() {
           <Wrapper />
         </div>
       </OpenContext.Provider>
+      {isOpen && <MusicPlayer isPlaying={shouldPlayMusic} />}
     </>
   );
 }
