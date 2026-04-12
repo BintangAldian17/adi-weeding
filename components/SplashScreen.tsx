@@ -3,17 +3,42 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-const PRELOAD_IMAGES = [
-  "/emvelop.svg",
-  "/images/bg-accent2.png",
-  "/images/hero2.png",
-  "/images/side-frame.png",
-  "/images/accent-flower.png",
-  "/images/accent-flower2.png",
-  "/images/accent-flower3.png",
-  "/images/mini-frame.png",
-  "/images/coin.png",
+// Helper untuk generate Next.js image URL
+function nextImageUrl(src: string, width: number) {
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=75`;
+}
+
+const PRELOAD_ASSETS: string[] = [
+  nextImageUrl("/emvelop.svg", 1440),
+  nextImageUrl("/images/bg-accent2.png", 1920),
+  nextImageUrl("/images/hero2.png", 1920),
+  nextImageUrl("/images/side-frame.png", 828),
+  nextImageUrl("/images/accent-flower.png", 828),
+  nextImageUrl("/images/accent-flower2.png", 828),
+  nextImageUrl("/images/accent-flower3.png", 828),
+  nextImageUrl("/images/mini-frame.png", 828),
+  nextImageUrl("/images/coin.png", 828),
+  nextImageUrl("/images/logo.png", 96),
+  nextImageUrl("/images/gallery1.jpg", 828),
+  nextImageUrl("/images/gallery2.jpg", 828),
+  nextImageUrl("/images/gallery3.jpg", 828),
+  nextImageUrl("/images/gallery4.jpg", 828),
+  nextImageUrl("/images/gallery5.jpg", 828),
+  nextImageUrl("/images/gallery6.jpg", 828),
+  nextImageUrl("/images/amplop-gift.png", 828),
+  nextImageUrl("/images/frame-social.png", 828),
+  nextImageUrl("/images/groom-couple.png", 828),
+  nextImageUrl("/images/bride-couple.png", 828),
 ];
+
+async function preloadAsset(src: string): Promise<void> {
+  return new Promise((resolve) => {
+    const img = new window.Image();
+    img.onload = () => resolve();
+    img.onerror = () => resolve(); // tetap lanjut walau error
+    img.src = src;
+  });
+}
 
 export default function SplashScreen({ onReady }: { onReady: () => void }) {
   const [progress, setProgress] = useState(0);
@@ -21,26 +46,33 @@ export default function SplashScreen({ onReady }: { onReady: () => void }) {
 
   useEffect(() => {
     let loaded = 0;
-    const total = PRELOAD_IMAGES.length;
+    const total = PRELOAD_ASSETS.length;
 
-    const onEach = () => {
-      loaded++;
-      setProgress(Math.round((loaded / total) * 100));
-      if (loaded >= total) {
-        // Tunggu sebentar di 100% agar user sempat lihat
-        setTimeout(() => {
-          setHiding(true);
-          setTimeout(onReady, 800); // sesuai durasi fade out
-        }, 400);
+    const run = async () => {
+      await Promise.all(
+        PRELOAD_ASSETS.map((src) =>
+          preloadAsset(src).then(() => {
+            loaded++;
+            setProgress(Math.round((loaded / total) * 100));
+          }),
+        ),
+      );
+
+      // Tunggu fonts
+      try {
+        await document.fonts.ready;
+      } catch {
+        // ignore
       }
+
+      setProgress(100);
+      await new Promise((r) => setTimeout(r, 400));
+      setHiding(true);
+      await new Promise((r) => setTimeout(r, 700));
+      onReady();
     };
 
-    PRELOAD_IMAGES.forEach((src) => {
-      const img = new window.Image();
-      img.onload = onEach;
-      img.onerror = onEach; // tetap lanjut walau error
-      img.src = src;
-    });
+    run();
   }, [onReady]);
 
   return (
@@ -64,7 +96,6 @@ export default function SplashScreen({ onReady }: { onReady: () => void }) {
             Loading
           </p>
 
-          {/* Progress bar */}
           <div className="w-[160px] h-[1px] bg-text-gold/20 overflow-hidden rounded-full">
             <div
               className="h-full bg-text-gold transition-all duration-300 ease-out rounded-full"

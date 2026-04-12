@@ -22,6 +22,11 @@ export default function Wrapper() {
       return () => window.removeEventListener("load", onLoad);
     }
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Hero />
