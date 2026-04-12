@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Alex_Brush, EB_Garamond, Alegreya } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const alexBrush = Alex_Brush({
+  variable: "--font-alex-brush",
+  weight: "400",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
+
+const alegreya = Alegreya({
+  variable: "--font-alegreya",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -25,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${alexBrush.variable} ${ebGaramond.variable} ${alegreya.variable} antialiased`}
       >
         {children}
       </body>
