@@ -4,59 +4,54 @@ import { useState, useRef, useEffect } from "react";
 import { Icon } from "@iconify/react";
 
 interface MusicPlayerProps {
-  isPlaying: boolean;
+  isPlaying: boolean; // State dari parent (Wrapper)
 }
-
-const songs = ["/audio/music1.mp3", "/audio/music2.mp3"];
 
 export default function MusicPlayer({
   isPlaying: initialPlayState,
 }: MusicPlayerProps) {
+  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const [selectedSong] = useState(() => {
-    return songs[Math.floor(Math.random() * songs.length)];
-  });
-
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  useEffect(() => {
-    if (!audioRef.current) return;
-
-    if (initialPlayState) {
+  const playMusic = () => {
+    if (audioRef.current) {
       audioRef.current
         .play()
-        .then(() => setIsPlaying(true))
-        .catch(() => setIsPlaying(false));
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.log("Autoplay dicegah browser, perlu interaksi user:", error);
+          setIsPlaying(false);
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (initialPlayState) {
+      playMusic();
     }
   }, [initialPlayState]);
 
-  const toggleMusic = async () => {
-    if (!audioRef.current) return;
-
+  // 2. Fungsi Play/Pause manual
+  const toggleMusic = () => {
     if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
+      audioRef.current?.pause();
     } else {
-      try {
-        await audioRef.current.play();
-        setIsPlaying(true);
-      } catch (error) {
-        console.log("Gagal memutar audio:", error);
-        setIsPlaying(false);
-      }
+      audioRef.current?.play();
     }
+    setIsPlaying(!isPlaying);
   };
 
   return (
     <div className="fixed lg:bottom-6 lg:right-6 md:bottom-4 md:right-4 bottom-2 right-2 z-50 p-safe">
-      {/* Audio */}
-      <audio ref={audioRef} src={selectedSong} loop />
+      {/* Element Audio Tersembunyi */}
+      <audio ref={audioRef} src="/audio/music1.mp3" loop />
 
-      {/* Button */}
+      {/* Tombol Floating */}
       <button
         onClick={toggleMusic}
-        className={`cursor-pointer
+        className={` cursor-pointer
           lg:size-12 md:size-10 size-8 rounded-full flex items-center justify-center 
           bg-[#D19B22]/80 backdrop-blur-md border border-white/20 shadow-lg text-white
           transition-all duration-300 ease-in-out

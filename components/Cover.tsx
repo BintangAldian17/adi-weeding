@@ -62,7 +62,7 @@ export default function Cover({ onOpen }: { onOpen: () => void }) {
       />
       <div
         className={`absolute inset-x-0 top-0 z-40 h-[55vh]
-        transition-transform duration-1200 ease-[cubic-bezier(0.22,1,0.36,1)]
+        transition-transform duration-2200 ease-[cubic-bezier(0.22,1,0.36,1)]
         ${open ? "-translate-y-[130%]" : "translate-y-0"}`}
       >
         <div className="absolute inset-0 xl:hidden">
@@ -140,7 +140,7 @@ export default function Cover({ onOpen }: { onOpen: () => void }) {
       {/* GROUP BAWAH */}
       <div
         className={`absolute inset-0 z-30
-        transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+        transition-transform duration-2000 ease-[cubic-bezier(0.22,1,0.36,1)]
         ${open ? "translate-y-full" : "translate-y-0"}`}
       >
         {/* SEGITIGA KIRI */}
