@@ -19,16 +19,6 @@ const PRELOAD_ASSETS: string[] = [
   nextImageUrl("/images/mini-frame.png", 828),
   nextImageUrl("/images/coin.png", 828),
   nextImageUrl("/images/logo.png", 96),
-  nextImageUrl("/images/gallery1.jpg", 828),
-  nextImageUrl("/images/gallery2.jpg", 828),
-  nextImageUrl("/images/gallery3.jpg", 828),
-  nextImageUrl("/images/gallery4.jpg", 828),
-  nextImageUrl("/images/gallery5.jpg", 828),
-  nextImageUrl("/images/gallery6.jpg", 828),
-  nextImageUrl("/images/amplop-gift.png", 828),
-  nextImageUrl("/images/frame-social.png", 828),
-  nextImageUrl("/images/groom-couple.png", 828),
-  nextImageUrl("/images/bride-couple.png", 828),
 ];
 
 async function preloadAsset(src: string): Promise<void> {

@@ -9,7 +9,7 @@ import SplashScreen from "./SplashScreen";
 import MusicPlayer from "./MusicPlayer";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 
-export default function Opening() {
+export default function Opening({ guestName }: { guestName: string }) {
   useScrollToTop();
 
   const [splashDone, setSplashDone] = useState(false);
@@ -43,7 +43,9 @@ export default function Opening() {
     <>
       {!splashDone && <SplashScreen onReady={handleSplashReady} />}
 
-      {splashDone && !isOpen && <Cover onOpen={handleOpen} />}
+      {splashDone && !isOpen && (
+        <Cover guestName={guestName} onOpen={handleOpen} />
+      )}
 
       <OpenContext.Provider value={isOpen}>
         <div

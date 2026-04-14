@@ -3,7 +3,13 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-export default function Cover({ onOpen }: { onOpen: () => void }) {
+export default function Cover({
+  onOpen,
+  guestName,
+}: {
+  onOpen: () => void;
+  guestName: string;
+}) {
   const [open, setOpen] = useState(false);
   const [tipY, setTipY] = useState({ top: 55, bottom: 45 }); // dalam vh
 
@@ -51,7 +57,7 @@ export default function Cover({ onOpen }: { onOpen: () => void }) {
   };
 
   return (
-    <section className="fixed inset-0 z-[999] overflow-hidden bg-transparent h-screen max-h-screen">
+    <section className="fixed inset-0 z-[999] overflow-hidden bg-transparent h-screen max-h-screen text-text-gold">
       {/* GROUP ATAS */}
       <Image
         src="/images/bg-accent2.png"
@@ -65,6 +71,13 @@ export default function Cover({ onOpen }: { onOpen: () => void }) {
         transition-transform duration-2200 ease-[cubic-bezier(0.22,1,0.36,1)]
         ${open ? "-translate-y-[130%]" : "translate-y-0"}`}
       >
+        <Image
+          src="/images/bg-accent2.png"
+          alt="Gallery"
+          width={1440}
+          height={1918}
+          className="absolute h-full w-full object-cover mix-blend-multiply z-20"
+        />
         <div className="absolute inset-0 xl:hidden">
           <Image
             src="/emvelop.svg"
@@ -84,7 +97,7 @@ export default function Cover({ onOpen }: { onOpen: () => void }) {
             className="absolute bottom-0 left-1/2 h-auto w-full max-w-none -translate-x-1/2 rotate-180 drop-shadow-[0_8px_12px_rgba(0,0,0,0.25)]"
           />
         </div>
-        <div className="absolute w-full h-full z-20 flex flex-col items-center justify-center text-text-gold xl:gap-6 gap-5">
+        <div className="absolute w-full h-full z-20 flex flex-col items-center justify-center  xl:gap-6 gap-5">
           <p className=" font-eb-garamond text-xs leading-none tracking-widest uppercase md:text-xl">
             the wedding of
           </p>
@@ -139,16 +152,23 @@ export default function Cover({ onOpen }: { onOpen: () => void }) {
 
       {/* GROUP BAWAH */}
       <div
-        className={`absolute inset-0 z-30
+        className={`absolute inset-0 z-30 
         transition-transform duration-2000 ease-[cubic-bezier(0.22,1,0.36,1)]
         ${open ? "translate-y-full" : "translate-y-0"}`}
       >
+        <Image
+          src="/images/bg-accent2.png"
+          alt="Gallery"
+          width={1440}
+          height={1918}
+          className="absolute h-full w-full object-cover mix-blend-multiply z-20"
+        />
         {/* SEGITIGA KIRI */}
         <div
           className="absolute inset-0"
           style={{
             clipPath: `polygon(0 0, 0 100%, 50% ${tipY.bottom}%, 50% ${tipY.top}%)`,
-            backgroundColor: "#620B1A",
+            backgroundColor: "#5c0d1a",
           }}
         />
 
@@ -157,12 +177,12 @@ export default function Cover({ onOpen }: { onOpen: () => void }) {
           className="absolute inset-0"
           style={{
             clipPath: `polygon(100% 0, 100% 100%, 50% ${tipY.bottom}%, 50% ${tipY.top}%)`,
-            backgroundColor: "#620B1A",
+            backgroundColor: "#5c0d1a",
           }}
         />
 
         {/* FLAP BAWAH */}
-        <div className="absolute inset-x-0 bottom-0 h-[55vh] overflow-hidden">
+        <div className="absolute inset-x-0 bottom-0 h-[55vh] overflow-hidden  flex items-center justify-center">
           <div className="absolute inset-0 xl:hidden">
             <Image
               src="/emvelop.svg"
@@ -170,6 +190,24 @@ export default function Cover({ onOpen }: { onOpen: () => void }) {
               fill
               className="object-cover object-top drop-shadow-[0_-8px_12px_rgba(0,0,0,0.25)]"
             />
+          </div>
+          <div className="flex flex-col items-center justify-center gap-6 relative z-20">
+            <p className="md:text-lg text-xs leading-none uppercase tracking-widest">
+              Dear,
+            </p>
+            <div className="text-center">
+              <h2 className="md:text-[32px] text-lg leading-none mb-4">
+                {guestName}
+              </h2>
+              <Image
+                data-hero-anim
+                src="/images/mini-frame.png"
+                alt="mini-frame"
+                width={195}
+                height={16}
+                className="h-auto w-[135px]  md:w-[195px] rotate-x-180"
+              />
+            </div>
           </div>
           <div className="absolute inset-0 hidden xl:block">
             <Image
