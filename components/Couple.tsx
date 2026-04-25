@@ -10,9 +10,11 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function Couple() {
   const rootRef = useRef<HTMLElement | null>(null);
-  const brideRef = useRef<HTMLDivElement | null>(null);
+  const bridePhotoRef = useRef<HTMLDivElement | null>(null);
+  const brideInfoRef = useRef<HTMLDivElement | null>(null);
   const ampersandRef = useRef<HTMLSpanElement | null>(null);
-  const groomRef = useRef<HTMLDivElement | null>(null);
+  const groomPhotoRef = useRef<HTMLDivElement | null>(null);
+  const groomInfoRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
     () => {
@@ -20,7 +22,7 @@ export default function Couple() {
         "(prefers-reduced-motion: reduce)",
       );
 
-      const animateBlock = (
+      const animatePhotoBlock = (
         block: HTMLDivElement | null,
         options?: {
           start?: string;
@@ -29,16 +31,7 @@ export default function Couple() {
         if (!block) return;
 
         const photo = block.querySelector<HTMLElement>("[data-couple-photo]");
-        const miniFrame = block.querySelector<HTMLElement>(
-          "[data-couple-mini-frame]",
-        );
-        const name = block.querySelector<HTMLElement>("[data-couple-name]");
-        const desc = block.querySelector<HTMLElement>("[data-couple-desc]");
-        const social = block.querySelector<HTMLElement>("[data-couple-social]");
-
-        const items = [photo, miniFrame, name, desc, social].filter(
-          Boolean,
-        ) as HTMLElement[];
+        const items = [photo].filter(Boolean) as HTMLElement[];
 
         if (!items.length) return;
 
@@ -53,7 +46,6 @@ export default function Couple() {
           return;
         }
 
-        // initial states
         if (photo) {
           gsap.set(photo, {
             opacity: 0,
@@ -62,6 +54,52 @@ export default function Couple() {
             transformOrigin: "center center",
             force3D: true,
           });
+        }
+
+        gsap.to(photo, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.25,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: block,
+            start: options?.start ?? "top 78%",
+            once: true,
+          },
+        });
+      };
+
+      const animateInfoBlock = (
+        block: HTMLDivElement | null,
+        options?: {
+          start?: string;
+        },
+      ) => {
+        if (!block) return;
+
+        const miniFrame = block.querySelector<HTMLElement>(
+          "[data-couple-mini-frame]",
+        );
+        const name = block.querySelector<HTMLElement>("[data-couple-name]");
+        const desc = block.querySelector<HTMLElement>("[data-couple-desc]");
+        const social = block.querySelector<HTMLElement>("[data-couple-social]");
+
+        const items = [miniFrame, name, desc, social].filter(
+          Boolean,
+        ) as HTMLElement[];
+
+        if (!items.length) return;
+
+        if (reduceMotion.matches) {
+          gsap.set(items, {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            scale: 1,
+            clearProps: "all",
+          });
+          return;
         }
 
         if (miniFrame) {
@@ -110,27 +148,17 @@ export default function Couple() {
           },
           scrollTrigger: {
             trigger: block,
-            start: options?.start ?? "top 78%",
+            start: options?.start ?? "top 82%",
             once: true,
           },
         });
 
-        tl.to(photo, {
+        tl.to(miniFrame, {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 1.25,
+          duration: 1.05,
         })
-          .to(
-            miniFrame,
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 1.05,
-            },
-            "-=0.65",
-          )
           .to(
             name,
             {
@@ -140,7 +168,7 @@ export default function Couple() {
               duration: 1.3,
               ease: "power3.out",
             },
-            "-=0.75",
+            "-=0.65",
           )
           .to(
             desc,
@@ -150,7 +178,7 @@ export default function Couple() {
               scale: 1,
               duration: 1.15,
             },
-            "-=0.85",
+            "-=0.8",
           )
           .to(
             social,
@@ -161,17 +189,15 @@ export default function Couple() {
               duration: 1.15,
               ease: "back.out(1.2)",
             },
-            "-=0.8",
+            "-=0.75",
           );
       };
 
-      // bride block
-      animateBlock(brideRef.current, { start: "top 78%" });
+      animatePhotoBlock(bridePhotoRef.current, { start: "top 82%" });
+      animateInfoBlock(brideInfoRef.current, { start: "top 78%" });
+      animatePhotoBlock(groomPhotoRef.current, { start: "top 82%" });
+      animateInfoBlock(groomInfoRef.current, { start: "top 78%" });
 
-      // groom block
-      animateBlock(groomRef.current, { start: "top 82%" });
-
-      // ampersand separate supaya tidak ikut "hilang duluan" di mobile
       if (ampersandRef.current) {
         if (reduceMotion.matches) {
           gsap.set(ampersandRef.current, {
@@ -247,22 +273,24 @@ export default function Couple() {
       </div>
 
       <div className="container flex w-full flex-col text-secondary">
-        <div className="relative flex flex-col items-center justify-center xl:flex-row xl:items-start">
+        <div className="relative flex flex-col items-center justify-center xl:flex-row xl:items-center">
           {/* LEFT / BRIDE */}
-          <div
-            ref={brideRef}
-            className="flex w-full flex-col justify-center xl:w-1/2"
-          >
-            <Image
-              data-couple-photo
-              src="/images/bride-couple.png"
-              alt="bride"
-              width={1148}
-              height={1280}
-              className="h-auto w-full will-change-transform"
-            />
+          <div className="flex w-full flex-col justify-center xl:w-1/2">
+            <div ref={bridePhotoRef}>
+              <Image
+                data-couple-photo
+                src="/images/bride-couple.png"
+                alt="bride"
+                width={1148}
+                height={1280}
+                className="h-auto w-full will-change-transform"
+              />
+            </div>
 
-            <div className="mt-12 flex flex-col items-center justify-center gap-3 xl:mt-14">
+            <div
+              ref={brideInfoRef}
+              className="mt-12 flex flex-col items-center justify-center gap-3 xl:mt-14"
+            >
               <Image
                 data-couple-mini-frame
                 src="/images/mini-frame.png"
@@ -274,7 +302,7 @@ export default function Couple() {
 
               <h2
                 data-couple-name
-                className="font-alex-brush text-[40px] will-change-transform xl:text-[64px]"
+                className="font-alex-brush text-[40px] will-change-transform xl:text-[64px] text-center"
               >
                 Devi Risma Anggraeni
               </h2>
@@ -317,28 +345,32 @@ export default function Couple() {
           </div>
 
           {/* AMPERSAND */}
-          <span
-            ref={ampersandRef}
-            className="font-alegreya text-[40px] will-change-transform xl:translate-y-[300px] xl:text-[80px]"
-          >
-            &
-          </span>
+          <div className="xl:self-center xl:flex xl:items-center xl:justify-center xl:px-6 xl:-translate-y-[150%]">
+            <span
+              ref={ampersandRef}
+              className="font-alegreya text-[40px] will-change-transform xl:text-[80px]"
+            >
+              &
+            </span>
+          </div>
 
           {/* RIGHT / GROOM */}
-          <div
-            ref={groomRef}
-            className="flex w-full flex-col justify-center xl:w-1/2"
-          >
-            <Image
-              data-couple-photo
-              src="/images/groom-couple.png"
-              alt="groom"
-              width={1148}
-              height={1280}
-              className="h-auto w-full will-change-transform"
-            />
+          <div className="flex w-full flex-col justify-center xl:w-1/2">
+            <div ref={groomPhotoRef}>
+              <Image
+                data-couple-photo
+                src="/images/groom-couple.png"
+                alt="groom"
+                width={1148}
+                height={1280}
+                className="h-auto w-full will-change-transform"
+              />
+            </div>
 
-            <div className="mt-12 flex flex-col items-center justify-center gap-3 xl:mt-14">
+            <div
+              ref={groomInfoRef}
+              className="mt-12 flex flex-col items-center justify-center gap-3 xl:mt-14"
+            >
               <Image
                 data-couple-mini-frame
                 src="/images/mini-frame.png"
@@ -350,7 +382,7 @@ export default function Couple() {
 
               <h2
                 data-couple-name
-                className="font-alex-brush text-[40px] will-change-transform xl:text-[64px]"
+                className="font-alex-brush text-[40px] will-change-transform xl:text-[64px] text-center"
               >
                 Gema Adi Perwira
               </h2>

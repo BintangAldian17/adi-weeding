@@ -1,5 +1,6 @@
 "use client";
 
+import type { WishItem } from "@/lib/actions/getWishes";
 import Hero from "./Hero";
 import Quote from "./Quote";
 import Couple from "./Couple";
@@ -10,8 +11,21 @@ import Event from "./Event";
 import Image from "next/image";
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/all";
+import Wishes from "./Wishes";
 
-export default function Wrapper() {
+export default function Wrapper({
+  guestId,
+  initialWishes,
+  initialPage,
+  totalPages,
+  totalWishes,
+}: {
+  guestId: string;
+  initialWishes: WishItem[];
+  initialPage: number;
+  totalPages: number;
+  totalWishes: number;
+}) {
   useEffect(() => {
     // Refresh lagi setelah semua gambar load
     const onLoad = () => ScrollTrigger.refresh();
@@ -47,6 +61,13 @@ export default function Wrapper() {
       <Gallery />
       <Event />
       <Gift />
+      <Wishes
+        guestId={guestId}
+        initialWishes={initialWishes}
+        initialPage={initialPage}
+        totalPages={totalPages}
+        totalWishes={totalWishes}
+      />
       <Closing />
     </>
   );

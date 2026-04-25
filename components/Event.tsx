@@ -45,7 +45,10 @@ export default function Event() {
   const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(EVENT_DATE));
 
   const rootRef = useRef<HTMLElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+  const introRef = useRef<HTMLDivElement | null>(null);
+  const dateSectionRef = useRef<HTMLDivElement | null>(null);
+  const locationSectionRef = useRef<HTMLDivElement | null>(null);
+  const countdownSectionRef = useRef<HTMLDivElement | null>(null);
   const dayCounterRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
@@ -68,39 +71,61 @@ export default function Event() {
 
   useGSAP(
     () => {
-      if (!contentRef.current) return;
+      if (
+        !introRef.current ||
+        !dateSectionRef.current ||
+        !locationSectionRef.current ||
+        !countdownSectionRef.current
+      ) {
+        return;
+      }
 
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       );
 
-      const headers = gsap.utils.toArray<HTMLElement>("[data-event-header]");
-      const paragraphs = gsap.utils.toArray<HTMLElement>("[data-event-desc]");
+      const introHeader = gsap.utils.toArray<HTMLElement>(
+        "[data-event-header='main']",
+      );
+      const introParagraph = gsap.utils.toArray<HTMLElement>(
+        "[data-event-desc='main']",
+      );
       const topFrames = gsap.utils.toArray<HTMLElement>(
         "[data-event-frame-top]",
       );
       const bottomFrames = gsap.utils.toArray<HTMLElement>(
         "[data-event-frame-bottom]",
       );
-      const timeCards = gsap.utils.toArray<HTMLElement>(
-        "[data-event-count-card]",
-      );
-      const mapButton = gsap.utils.toArray<HTMLElement>("[data-event-map]");
       const staticNumbers = gsap.utils.toArray<HTMLElement>(
         "[data-event-static-num]",
       );
-
+      const locationHeader = gsap.utils.toArray<HTMLElement>(
+        "[data-event-header='location']",
+      );
+      const locationParagraphs = gsap.utils.toArray<HTMLElement>(
+        "[data-event-desc='location']",
+      );
+      const mapButton = gsap.utils.toArray<HTMLElement>("[data-event-map]");
+      const countdownHeader = gsap.utils.toArray<HTMLElement>(
+        "[data-event-header='countdown']",
+      );
+      const timeCards = gsap.utils.toArray<HTMLElement>(
+        "[data-event-count-card]",
+      );
       const dateNumber = dayCounterRef.current ? [dayCounterRef.current] : [];
 
       const allAnimated = [
-        ...headers,
-        ...paragraphs,
+        ...introHeader,
+        ...introParagraph,
         ...topFrames,
         ...bottomFrames,
-        ...timeCards,
-        ...mapButton,
         ...staticNumbers,
         ...dateNumber,
+        ...locationHeader,
+        ...locationParagraphs,
+        ...mapButton,
+        ...countdownHeader,
+        ...timeCards,
       ];
 
       if (reduceMotion.matches) {
@@ -118,8 +143,7 @@ export default function Event() {
         return;
       }
 
-      // initial state
-      gsap.set(headers, {
+      gsap.set(introHeader, {
         opacity: 0,
         y: -28,
         scale: 1.08,
@@ -127,7 +151,23 @@ export default function Event() {
         force3D: true,
       });
 
-      gsap.set(paragraphs, {
+      gsap.set(introParagraph, {
+        opacity: 0,
+        y: 28,
+        scale: 1.08,
+        transformOrigin: "center center",
+        force3D: true,
+      });
+
+      gsap.set(locationHeader, {
+        opacity: 0,
+        y: -28,
+        scale: 1.08,
+        transformOrigin: "center center",
+        force3D: true,
+      });
+
+      gsap.set(locationParagraphs, {
         opacity: 0,
         y: 28,
         scale: 1.08,
@@ -146,6 +186,14 @@ export default function Event() {
       gsap.set(bottomFrames, {
         opacity: 0,
         y: 22,
+        scale: 1.08,
+        transformOrigin: "center center",
+        force3D: true,
+      });
+
+      gsap.set(countdownHeader, {
+        opacity: 0,
+        y: -28,
         scale: 1.08,
         transformOrigin: "center center",
         force3D: true,
@@ -185,9 +233,9 @@ export default function Event() {
         });
       }
 
-      const tl = gsap.timeline({
+      const introTl = gsap.timeline({
         scrollTrigger: {
-          trigger: contentRef.current,
+          trigger: introRef.current,
           start: "top 80%",
           once: true,
         },
@@ -196,15 +244,16 @@ export default function Event() {
         },
       });
 
-      tl.to("[data-event-header='main']", {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 1.5,
-        ease: "power3.out",
-      })
+      introTl
+        .to(introHeader, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.5,
+          ease: "power3.out",
+        })
         .to(
-          "[data-event-desc='main']",
+          introParagraph,
           {
             opacity: 1,
             y: 0,
@@ -212,20 +261,28 @@ export default function Event() {
             duration: 1.35,
           },
           "-=0.95",
-        )
+        );
+
+      const dateTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: dateSectionRef.current,
+          start: "top 82%",
+          once: true,
+        },
+        defaults: {
+          ease: "power2.out",
+        },
+      });
+
+      dateTl.to(topFrames, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.1,
+        stagger: 0.1,
+      })
         .to(
-          "[data-event-frame-top]",
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1.1,
-            stagger: 0.1,
-          },
-          "-=0.8",
-        )
-        .to(
-          "[data-event-static-num]",
+          staticNumbers,
           {
             opacity: 1,
             y: 0,
@@ -234,7 +291,7 @@ export default function Event() {
             stagger: 0.08,
             ease: "power3.out",
           },
-          "-=0.95",
+          "-=0.8",
         )
         .to(
           dayCounterRef.current,
@@ -248,7 +305,7 @@ export default function Event() {
           "<",
         )
         .to(
-          "[data-event-frame-bottom]",
+          bottomFrames,
           {
             opacity: 1,
             y: 0,
@@ -262,7 +319,7 @@ export default function Event() {
       if (dayCounterRef.current) {
         const counterObj = { value: 0 };
 
-        tl.to(
+        dateTl.to(
           counterObj,
           {
             value: 31,
@@ -280,19 +337,27 @@ export default function Event() {
         );
       }
 
-      tl.to(
-        "[data-event-header='location']",
-        {
+      const locationTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: locationSectionRef.current,
+          start: "top 82%",
+          once: true,
+        },
+        defaults: {
+          ease: "power2.out",
+        },
+      });
+
+      locationTl
+        .to(locationHeader, {
           opacity: 1,
           y: 0,
           scale: 1,
           duration: 1.35,
           ease: "power3.out",
-        },
-        "-=0.65",
-      )
+        })
         .to(
-          "[data-event-desc='location']",
+          locationParagraphs,
           {
             opacity: 1,
             y: 0,
@@ -300,10 +365,10 @@ export default function Event() {
             duration: 1.25,
             stagger: 0.12,
           },
-          "-=0.95",
+          "-=0.85",
         )
         .to(
-          "[data-event-map]",
+          mapButton,
           {
             opacity: 1,
             y: 0,
@@ -311,21 +376,30 @@ export default function Event() {
             duration: 1.15,
             ease: "back.out(1.15)",
           },
-          "-=0.8",
-        )
+          "-=0.7",
+        );
+
+      const countdownTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: countdownSectionRef.current,
+          start: "top 82%",
+          once: true,
+        },
+        defaults: {
+          ease: "power2.out",
+        },
+      });
+
+      countdownTl
+        .to(countdownHeader, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.45,
+          ease: "power3.out",
+        })
         .to(
-          "[data-event-header='countdown']",
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1.45,
-            ease: "power3.out",
-          },
-          "-=0.75",
-        )
-        .to(
-          "[data-event-count-card]",
+          timeCards,
           {
             opacity: 1,
             y: 0,
@@ -334,7 +408,8 @@ export default function Event() {
             stagger: 0.08,
           },
           "-=0.9",
-        );
+        )
+        ;
     },
     { scope: rootRef },
   );
@@ -406,27 +481,29 @@ export default function Event() {
         className="absolute bottom-10 left-1/2 h-auto w-[196px] -translate-x-1/2 rotate-180 xl:bottom-[110px] xl:w-[353px]"
       />
 
-      <div
-        ref={contentRef}
-        className="container px-[15px] pt-32 pb-[112px] text-secondary xl:pt-44 xl:pb-[273px]"
-      >
-        <h2
-          data-event-header="main"
-          className="text-center font-alex-brush text-[40px] will-change-transform xl:text-[88px]"
-        >
-          Save The Date
-        </h2>
+      <div className="container px-[15px] pt-32 pb-[112px] text-secondary xl:pt-44 xl:pb-[273px]">
+        <div ref={introRef}>
+          <h2
+            data-event-header="main"
+            className="text-center font-alex-brush text-[40px] will-change-transform xl:text-[88px]"
+          >
+            Save The Date
+          </h2>
 
-        <p
-          data-event-desc="main"
-          className="px-12 pt-5 text-center leading-none will-change-transform xl:px-0 xl:pt-[72px] xl:text-[32px]"
-        >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry&apos;s standard dummy text
-          ever since the
-        </p>
+          <p
+            data-event-desc="main"
+            className="px-12 pt-5 text-center leading-none will-change-transform xl:px-0 xl:pt-[72px] xl:text-[32px]"
+          >
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry&apos;s standard dummy text
+            ever since the
+          </p>
+        </div>
 
-        <div className="mt-10 flex items-center justify-between gap-0 px-2.5 xl:mt-[72px] xl:justify-center xl:gap-[72px] xl:px-0">
+        <div
+          ref={dateSectionRef}
+          className="mt-10 flex items-center justify-between gap-0 px-2.5 xl:mt-[72px] xl:justify-center xl:gap-[72px] xl:px-0"
+        >
           <div className="flex flex-col items-center justify-center gap-2 xl:gap-4">
             <Image
               data-event-frame-top
@@ -499,7 +576,10 @@ export default function Event() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 xl:mt-[72px] xl:gap-10">
+        <div
+          ref={locationSectionRef}
+          className="mt-10 flex flex-col items-center justify-center gap-4 xl:mt-[72px] xl:gap-10"
+        >
           <h3
             data-event-header="location"
             className="text-[28px] leading-none will-change-transform xl:text-[56px]"
@@ -548,7 +628,10 @@ export default function Event() {
           </a>
         </div>
 
-        <div className="mt-5 flex flex-col gap-5 xl:mt-[128px] xl:gap-[72px]">
+        <div
+          ref={countdownSectionRef}
+          className="mt-5 flex flex-col gap-5 xl:mt-[128px] xl:gap-[72px]"
+        >
           <h3
             data-event-header="countdown"
             className="text-center font-alex-brush text-[40px] leading-none will-change-transform xl:text-[88px]"
@@ -556,23 +639,25 @@ export default function Event() {
             Count the date
           </h3>
 
-          <div className="flex justify-center gap-[5px] xl:gap-[88px]">
+          <div className="flex justify-center xl:gap-[88px]">
             {countdownItems.map((item) => (
               <span
                 key={item.label}
                 data-event-count-card
-                className="relative h-[115px] w-[83px] will-change-transform"
+                className="relative md:w-[271px] md:h-[321px] w-[83px] h-[115px] will-change-transform"
               >
                 <Image
-                  src="/images/count-frame.png"
+                  src="/images/count-frame-2.png"
                   alt={item.label}
-                  width={83}
-                  height={115}
-                  className="absolute"
+                  width={271}
+                  height={321}
+                  className="absolute md:w-[271px] md:h-[321px] w-[83px] h-[115px]"
                 />
-                <span className="absolute top-1/2 left-1/2 z-10 -translate-x-[40%] -translate-y-1/2 transform text-center text-[24px] leading-none font-bold text-text-dark">
+                <span className="absolute top-1/2 left-1/2 z-10 -translate-x-[40%] -translate-y-1/2 transform text-center text-[24px] leading-none font-bold text-text-dark md:text-[64px]">
                   {item.value}
-                  <p className="text-[10px] font-normal">{item.label}</p>
+                  <p className="text-[10px] md:text-2xl font-normal">
+                    {item.label}
+                  </p>
                 </span>
               </span>
             ))}

@@ -6,61 +6,227 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useIsOpen } from "@/context/OpeningContext";
+import { cn } from "@/utils/cn";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-export default function Hero() {
+export default function Hero({ isDefault = false }: { isDefault?: boolean }) {
   const rootRef = useRef<HTMLElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
+  const dayCounterRef = useRef<HTMLSpanElement | null>(null);
   const isOpen = useIsOpen();
+
+  const dependencies = isDefault ? [] : [isOpen];
 
   useGSAP(
     () => {
-      if (!isOpen) return;
+      if (!isOpen && !isDefault) return;
       if (!textRef.current) return;
 
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       );
+      const heroItems = gsap.utils.toArray<HTMLElement>("[data-hero-anim]");
+      const topFrames = gsap.utils.toArray<HTMLElement>(
+        "[data-hero-frame-top]",
+      );
+      const bottomFrames = gsap.utils.toArray<HTMLElement>(
+        "[data-hero-frame-bottom]",
+      );
+      const staticNumbers = gsap.utils.toArray<HTMLElement>(
+        "[data-hero-static-num]",
+      );
+      const defaultTexts = gsap.utils.toArray<HTMLElement>(
+        "[data-hero-default-text]",
+      );
+      const dateNumber = dayCounterRef.current ? [dayCounterRef.current] : [];
+      const defaultAnimated = [
+        ...topFrames,
+        ...bottomFrames,
+        ...staticNumbers,
+        ...defaultTexts,
+        ...dateNumber,
+      ];
 
       if (reduceMotion.matches) {
-        gsap.set("[data-hero-anim]", {
+        gsap.set(heroItems, {
           opacity: 1,
           y: 0,
           clearProps: "transform",
         });
+
+        if (defaultAnimated.length > 0) {
+          gsap.set(defaultAnimated, {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            scale: 1,
+            clearProps: "all",
+          });
+        }
+
+        if (dayCounterRef.current) {
+          dayCounterRef.current.textContent = "31";
+        }
         return;
       }
 
-      const items = gsap.utils.toArray<HTMLElement>("[data-hero-anim]");
-
-      gsap.set(items, {
+      gsap.set(heroItems, {
         y: 40,
         opacity: 0,
-        force3D: true, // 🔥 penting untuk GPU
+        force3D: true,
       });
 
-      gsap.to(items, {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.15,
-        ease: "power3.out",
+      gsap.set(topFrames, {
+        opacity: 0,
+        y: -22,
+        scale: 1.08,
+        transformOrigin: "center center",
         force3D: true,
+      });
+
+      gsap.set(bottomFrames, {
+        opacity: 0,
+        y: 22,
+        scale: 1.08,
+        transformOrigin: "center center",
+        force3D: true,
+      });
+
+      gsap.set(staticNumbers, {
+        opacity: 0,
+        y: 0,
+        scale: 1.08,
+        transformOrigin: "center center",
+        force3D: true,
+      });
+
+      gsap.set(defaultTexts, {
+        opacity: 0,
+        y: 24,
+        scale: 1.06,
+        transformOrigin: "center center",
+        force3D: true,
+      });
+
+      if (dayCounterRef.current) {
+        gsap.set(dayCounterRef.current, {
+          opacity: 0,
+          y: 0,
+          scale: 1.08,
+          transformOrigin: "center center",
+          force3D: true,
+        });
+      }
+
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: textRef.current,
           start: "top 80%",
           once: true,
         },
+        defaults: {
+          ease: "power3.out",
+        },
       });
+
+      tl.to(heroItems, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.15,
+        force3D: true,
+      });
+
+      if (!isDefault) return;
+
+      tl.to(
+        topFrames,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.05,
+          stagger: 0.08,
+        },
+        "-=0.35",
+      )
+        .to(
+          staticNumbers,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.1,
+            stagger: 0.08,
+          },
+          "-=0.85",
+        )
+        .to(
+          dayCounterRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.1,
+          },
+          "<",
+        )
+        .to(
+          bottomFrames,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.05,
+            stagger: 0.08,
+          },
+          "-=0.95",
+        );
+
+      if (dayCounterRef.current) {
+        const counterObj = { value: 0 };
+
+        tl.to(
+          counterObj,
+          {
+            value: 31,
+            duration: 1.1,
+            ease: "power3.out",
+            onUpdate: () => {
+              if (dayCounterRef.current) {
+                dayCounterRef.current.textContent = String(
+                  Math.round(counterObj.value),
+                );
+              }
+            },
+          },
+          "<",
+        );
+      }
+
+      tl.to(
+        defaultTexts,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.15,
+          stagger: 0.12,
+        },
+        "-=0.5",
+      );
     },
-    { scope: rootRef, dependencies: [isOpen] },
+    { scope: rootRef, dependencies },
   );
 
   return (
     <section
       ref={rootRef}
-      className="relative h-[50vh] w-full bg-primary xl:h-screen"
+      className={cn(
+        "relative h-[50vh] w-full bg-primary xl:h-screen",
+        isDefault ? "h-[70vh]" : " h-[50vh]",
+      )}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full overflow-x-clip">
         <div className="absolute top-0 left-0 flex h-full">
@@ -165,7 +331,12 @@ export default function Hero() {
       <div className="absolute bottom-0 z-20 h-1/2 w-full bg-linear-to-t from-primary from-10% to-transparent" />
 
       <div className="relative z-0 h-full w-full overflow-hidden">
-        <div className="absolute inset-0 md:scale-100 scale-125">
+        <div
+          className={cn(
+            "absolute inset-0 md:scale-100 ",
+            !isDefault && "scale-125",
+          )}
+        >
           <Image
             src="/images/hero2.png"
             alt="hero-bg"
@@ -188,7 +359,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-50 flex flex-col items-center justify-center text-secondary">
         <div
           ref={textRef}
-          className="flex translate-y-[60%] flex-col items-center gap-2 md:translate-y-[40%] md:gap-6"
+          className="flex translate-y-[50%] flex-col items-center gap-2 md:translate-y-[30%] md:gap-6"
         >
           <p
             data-hero-anim
@@ -209,34 +380,126 @@ export default function Hero() {
               Adi
             </span>
           </h1>
+          {isDefault ? (
+            <div className=" flex items-center justify-between gap-9 px-2.5 xl:justify-center xl:gap-[72px] xl:px-0">
+              <div className="flex flex-col items-center justify-center gap-2 xl:gap-4">
+                <Image
+                  data-hero-frame-top
+                  src="/images/mini-frame.png"
+                  alt="mini-frame"
+                  width={340}
+                  height={28}
+                  className="w-[102px] will-change-transform xl:w-[305px]"
+                />
+                <span
+                  data-hero-static-num
+                  className="text-sm will-change-transform xl:text-[32px]"
+                >
+                  Minggu
+                </span>
+                <Image
+                  data-hero-frame-bottom
+                  src="/images/mini-frame.png"
+                  alt="mini-frame"
+                  width={340}
+                  height={28}
+                  className="w-[102px] rotate-180 will-change-transform xl:w-[305px]"
+                />
+              </div>
 
-          <div className="flex flex-col items-center justify-center gap-2 md:gap-4">
-            <Image
-              data-hero-anim
-              src="/images/mini-frame.png"
-              alt="mini-frame"
-              width={195}
-              height={16}
-              className="h-auto w-[135px] translate-y-6 opacity-0 md:w-[195px]"
-            />
+              <div className="flex flex-col items-center justify-center gap-2 xl:gap-4">
+                <span
+                  data-hero-static-num
+                  className="text-[18px] will-change-transform xl:text-[32px] leading-none"
+                >
+                  Mei
+                </span>
+                <span
+                  ref={dayCounterRef}
+                  className="text-[28px] leading-none font-bold will-change-transform xl:text-[80px]"
+                >
+                  0
+                </span>
+                <span
+                  data-hero-static-num
+                  className="text-[18px] will-change-transform xl:text-[32px] leading-none"
+                >
+                  2026
+                </span>
+              </div>
 
-            <time
-              data-hero-anim
-              dateTime="2026-05-31"
-              className="translate-y-6 opacity-0 md:text-2xl"
-            >
-              31 Mei 2026
-            </time>
+              <div className="flex flex-col items-center justify-center gap-2 xl:gap-4">
+                <Image
+                  data-hero-frame-top
+                  src="/images/mini-frame.png"
+                  alt="mini-frame"
+                  width={340}
+                  height={28}
+                  className="w-[102px] will-change-transform xl:w-[305px]"
+                />
+                <span
+                  data-hero-static-num
+                  className="text-sm will-change-transform xl:text-[32px]"
+                >
+                  12:00 - 15:00 WIB
+                </span>
+                <Image
+                  data-hero-frame-bottom
+                  src="/images/mini-frame.png"
+                  alt="mini-frame"
+                  width={340}
+                  height={28}
+                  className="w-[102px] rotate-180 will-change-transform xl:w-[305px]"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center gap-2 md:gap-4">
+              <Image
+                data-hero-anim
+                src="/images/mini-frame.png"
+                alt="mini-frame"
+                width={195}
+                height={16}
+                className="h-auto w-[135px] translate-y-6 opacity-0 md:w-[195px]"
+              />
 
-            <Image
-              data-hero-anim
-              src="/images/mini-frame.png"
-              alt="mini-frame"
-              width={195}
-              height={16}
-              className="h-auto w-[135px] translate-y-6 rotate-180 opacity-0 md:w-[195px]"
-            />
-          </div>
+              <time
+                data-hero-anim
+                dateTime="2026-05-31"
+                className="translate-y-6 opacity-0 md:text-2xl"
+              >
+                31 Mei 2026
+              </time>
+
+              <Image
+                data-hero-anim
+                src="/images/mini-frame.png"
+                alt="mini-frame"
+                width={195}
+                height={16}
+                className="h-auto w-[135px] translate-y-6 rotate-180 opacity-0 md:w-[195px]"
+              />
+            </div>
+          )}
+          {isDefault && (
+            <div className="flex flex-col md:gap-8 gap-4 items-center justify-center xl:mt-4 mt-10">
+              <h3
+                data-hero-default-text
+                className="uppercase md:font-bold md:text-2xl text-center leading-none will-change-transform"
+              >
+                GEDUNG CAKRAWALA LANUD <br className="md:hidden block" />{" "}
+                ABDULRACHMAN SALEH
+              </h3>
+              <p
+                data-hero-default-text
+                className="font-normal text-center leading-none md:text-base text-sm will-change-transform"
+              >
+                Jl. Krajan Saptorenggo, Kecamatan Pakis,{" "}
+                <br className="md:hidden md:block" /> Kabupaten Malang
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </section>

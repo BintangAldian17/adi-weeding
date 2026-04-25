@@ -1,16 +1,31 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { copyToClipboard } from "@/utils/copyToClipboard";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+const ACCOUNT_NUMBER = "0113306464";
 
 export default function Gift() {
   const rootRef = useRef<HTMLElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyAccount = async () => {
+    try {
+      await copyToClipboard(ACCOUNT_NUMBER);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useGSAP(
     () => {
@@ -218,17 +233,18 @@ export default function Gift() {
           data-gift-desc
           className="xl:text-[32px] text-center leading-none will-change-transform"
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
+          Your blessing and coming to our wedding are enough for us. However, if
+          you want to give a gift we provide a Digital Envelope to make it
+          easier for you. thank you
         </p>
 
         {/* ENVELOPE */}
         <div data-gift-envelope className="relative will-change-transform">
           <Image
-            src="/images/amplop-gift.png"
+            src="/images/gift-frame-2.png"
             alt="gift-frame"
-            width={684}
-            height={492}
+            width={683}
+            height={491}
             className="xl:w-[684px] w-[301px] h-auto"
           />
 
@@ -237,20 +253,26 @@ export default function Gift() {
             data-gift-inner
             className="text-center text-text-dark absolute top-[65%] left-1/2 -translate-x-1/2 will-change-transform"
           >
-            <p className="xl:text-2xl font-alex-brush leading-none">E-Angpao</p>
+            <p className="xl:text-[40px] font-alex-brush leading-none">
+              E-Angpao
+            </p>
 
-            <div className="text-center text-sm mt-2">
+            <div className="text-center text-sm xl:text-[32px] mt-2">
               <div className="flex gap-3 items-center justify-center">
-                <p className="font-bold leading-none">BCA - 0113306464</p>
-                <div className="flex items-center justify-center size-4 rounded-full bg-secondary">
-                  <Image
-                    src="/images/copy-icon.png"
-                    alt="copy"
-                    width={12}
-                    height={12}
+                <p className="font-bold leading-none">BCA - {ACCOUNT_NUMBER}</p>
+                <button
+                  type="button"
+                  onClick={handleCopyAccount}
+                  className="flex items-center justify-center size-4 xl:size-9 rounded-full bg-secondary transition-transform hover:scale-105"
+                  aria-label="Copy nomor rekening"
+                >
+                  <Icon
+                    icon={copied ? "mdi:check" : "mdi:content-copy"}
+                    className="xl:size-5 size-2.5 text-text-dark"
                   />
-                </div>
+                </button>
               </div>
+
               <p>Gema Adi Perwira</p>
             </div>
           </div>
