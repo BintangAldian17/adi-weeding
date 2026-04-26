@@ -127,21 +127,23 @@ export default function Cover({
         />
 
         {/* CONTENT */}
-        <div className="absolute inset-0 md:translate-y-1/3 translate-y-1/4 z-40 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-6">
-            <p className="text-xs uppercase tracking-widest md:text-lg">
+        <div className="absolute inset-0 md:translate-y-1/3 translate-y-[20%] z-40 flex items-center justify-center">
+          <div className="flex flex-col items-center xl:gap-6 gap-2">
+            <p className="text-[10px] uppercase tracking-wide md:text-lg">
               Dear,
             </p>
 
             <div className="text-center">
-              <h2 className="mb-4 text-lg md:text-[32px]">{guestName}</h2>
+              <h2 className="mb-4 text-lg md:text-[32px] leading-none">
+                {guestName}
+              </h2>
 
               <Image
                 src="/images/mini-frame.webp"
                 alt="frame"
                 width={195}
                 height={16}
-                className="w-[135px] md:w-[195px]"
+                className="w-[135px] md:w-[195px] rotate-x-180"
               />
             </div>
           </div>
