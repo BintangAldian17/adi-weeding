@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { createClient } from "../../../utils/supabase/server";
 import { cookies } from "next/headers";
 import Opening from "@/components/Opening";
+import { createClient } from "../../../utils/supabase/server";
 import { getWishes } from "@/lib/actions/getWishes";
 
 const siteTitle = "The Wedding of Devi & Adi";
+
 const siteDescription =
   "Join us in celebrating the wedding of Devi & Adi on 31 Mei 2026.";
+
+const ogImage = "/og-image-v5.jpg";
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
+  const { id } = await params;
+
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
-  const id = (await params).id;
+
   const { data } = await supabase
     .from("guests")
     .select("name")
@@ -24,25 +29,47 @@ export async function generateMetadata({
     .single();
 
   const guestName = data?.name?.trim();
+
   const title = guestName
     ? `${guestName} - Wedding Invitation`
     : "Wedding Invitation";
+
   const description = guestName
     ? `${guestName}, you are invited to celebrate the wedding of Devi & Adi on 31 Mei 2026.`
     : siteDescription;
 
+  const pageUrl = `/guests/${id}`;
+
   return {
-    title,
+    title: `${title} | ${siteTitle}`,
     description,
-    openGraph: {
-      title: `${title} | ${siteTitle}`,
-      description,
-      images: ["/icon1.png"],
+
+    alternates: {
+      canonical: pageUrl,
     },
-    twitter: {
+
+    openGraph: {
+      type: "website",
+      locale: "id_ID",
+      url: pageUrl,
       title: `${title} | ${siteTitle}`,
       description,
-      images: ["/icon1.png"],
+      siteName: siteTitle,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: siteTitle,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | ${siteTitle}`,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -54,11 +81,14 @@ export default async function GuestPage({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ page?: string }>;
 }) {
+  const { id } = await params;
+  const { page } = await searchParams;
+
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
-  const id = (await params).id;
-  const pageParam = (await searchParams).page;
-  const currentPage = Math.max(1, Number(pageParam) || 1);
+
+  const currentPage = Math.max(1, Number(page) || 1);
+
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -72,7 +102,7 @@ export default async function GuestPage({
   const wishesData = await getWishes(currentPage, 8);
 
   return (
-    <main className="w-full h-full bg-primary">
+    <main className="h-full w-full bg-primary">
       <Opening
         guestName={data.name}
         guestId={id}

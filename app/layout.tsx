@@ -11,7 +11,6 @@ const siteDescription =
   "Join us in celebrating the wedding of Devi & Adi on 31 Mei 2026. View the invitation, event details, and send your wishes.";
 
 const shareImage = "/og-image-v5.jpg";
-const shareImageUrl = new URL(shareImage, siteUrl).toString();
 
 const alexBrush = Alex_Brush({
   variable: "--font-alex-brush",
@@ -40,7 +39,6 @@ export const metadata: Metadata = {
   },
 
   description: siteDescription,
-
   applicationName: siteTitle,
 
   keywords: [
@@ -56,10 +54,6 @@ export const metadata: Metadata = {
   creator: "Devi & Adi",
   publisher: "Devi & Adi",
 
-  alternates: {
-    canonical: "/",
-  },
-
   openGraph: {
     type: "website",
     locale: "id_ID",
@@ -69,7 +63,7 @@ export const metadata: Metadata = {
     siteName: siteTitle,
     images: [
       {
-        url: shareImageUrl,
+        url: shareImage,
         width: 1200,
         height: 630,
         alt: siteTitle,
@@ -81,7 +75,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
-    images: [shareImageUrl],
+    images: [shareImage],
   },
 
   icons: {
@@ -94,9 +88,6 @@ export const metadata: Metadata = {
   },
 
   manifest: "/manifest.json",
-
-  themeColor: "#390414",
-
   category: "event",
 };
 
