@@ -10,7 +10,7 @@ const siteTitle = "The Wedding of Devi & Adi";
 const siteDescription =
   "Join us in celebrating the wedding of Devi & Adi on 31 Mei 2026. View the invitation, event details, and send your wishes.";
 
-const shareImage = "/og-image.png";
+const shareImage = "/og-image-v2.png";
 const shareImageUrl = new URL(shareImage, siteUrl).toString();
 
 const alexBrush = Alex_Brush({
