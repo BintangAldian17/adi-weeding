@@ -95,7 +95,7 @@ export default function Cover({
           className="
             absolute left-1/2 bottom-0 z-50
             -translate-x-1/2 translate-y-1/2
-            h-auto w-[200px] md:w-[250px] xl:w-[350px]
+            h-auto w-[200px] md:w-[250px] xl:w-[300px]
           "
         />
       </div>
@@ -127,7 +127,7 @@ export default function Cover({
         />
 
         {/* CONTENT */}
-        <div className="absolute inset-0 translate-y-1/3 z-40 flex items-center justify-center">
+        <div className="absolute inset-0 md:translate-y-1/3 translate-y-1/4 z-40 flex items-center justify-center">
           <div className="flex flex-col items-center gap-6">
             <p className="text-xs uppercase tracking-widest md:text-lg">
               Dear,
