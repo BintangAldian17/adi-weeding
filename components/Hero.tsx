@@ -333,18 +333,14 @@ export default function Hero({ isDefault = false }: { isDefault?: boolean }) {
       <div className="absolute bottom-0 z-20 h-1/2 w-full bg-linear-to-t from-primary from-10% to-transparent" />
 
       <div className="relative z-0 h-full w-full overflow-hidden">
-        <div
-          className={cn(
-            "absolute inset-0 scale-110 sm:scale-105 md:scale-100",
-            !isDefault && "scale-125",
-          )}
-        >
+        <div className={cn("absolute inset-0 ")}>
           <Image
             src="/images/hero2.webp"
             alt="hero-bg"
             fill
             priority
-            sizes="100vw"
+            quality={95}
+            sizes="(max-width: 640px) 200vw, (max-width: 1024px) 150vw, 100vw"
             className="object-cover object-center"
           />
         </div>
@@ -361,7 +357,7 @@ export default function Hero({ isDefault = false }: { isDefault?: boolean }) {
       <div className="absolute inset-0 z-50 flex flex-col items-center justify-center text-secondary">
         <div
           ref={textRef}
-          className="flex translate-y-[42%] flex-col items-center gap-3 px-4 sm:translate-y-[38%] sm:gap-4 lg:translate-y-[32%] lg:gap-5 xl:translate-y-[30%] xl:gap-6"
+          className="flex translate-y-[42%] flex-col items-center gap-3 px-4 sm:translate-y-[38%] sm:gap-4 lg:translate-y-[32%] lg:gap-5 xl:translate-y-[40%] xl:gap-0"
         >
           <p
             data-hero-anim

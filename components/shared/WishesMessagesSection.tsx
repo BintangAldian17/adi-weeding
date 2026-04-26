@@ -39,12 +39,16 @@ export default function WishesMessagesSection({
 
   return (
     <div className="relative h-full w-full bg-secondary">
-      <Image
-        src="/images/bg-accent2.webp"
-        alt="Gallery"
-        width={1440}
-        height={1918}
-        className="absolute h-full w-full object-cover mix-blend-multiply"
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "url('/images/bg-accent2.webp')",
+          backgroundPosition: "top center",
+          backgroundRepeat: "repeat-y",
+          backgroundSize: "100% auto",
+          mixBlendMode: "multiply",
+        }}
       />
       <Image
         data-wishes-list-anim

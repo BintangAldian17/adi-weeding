@@ -249,9 +249,12 @@ export default function Gift() {
           />
 
           {/* INNER TEXT */}
-          <div
+          <button
+            type="button"
+            onClick={handleCopyAccount}
             data-gift-inner
             className="absolute top-[65%] left-1/2 w-[68%] -translate-x-1/2 text-center text-text-dark will-change-transform sm:w-[70%] lg:w-[72%]"
+            aria-label="Copy nomor rekening BCA"
           >
             <p className="font-alex-brush text-[22px] leading-none sm:text-[28px] lg:text-[34px] xl:text-[40px]">
               E-Angpao
@@ -260,22 +263,17 @@ export default function Gift() {
             <div className="mt-1.5 text-center text-[10px] sm:mt-2 sm:text-sm lg:text-[1.375rem] xl:text-[32px]">
               <div className="flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3">
                 <p className="font-bold leading-none">BCA - {ACCOUNT_NUMBER}</p>
-                <button
-                  type="button"
-                  onClick={handleCopyAccount}
-                  className="flex size-4 items-center justify-center rounded-full bg-secondary transition-transform hover:scale-105 sm:size-5 lg:size-7 xl:size-9"
-                  aria-label="Copy nomor rekening"
-                >
+                <span className="flex size-4 items-center justify-center rounded-full bg-secondary transition-transform sm:size-5 lg:size-7 xl:size-9">
                   <Icon
                     icon={copied ? "mdi:check" : "mdi:content-copy"}
                     className="size-2.5 text-text-dark sm:size-3 lg:size-4 xl:size-5"
                   />
-                </button>
+                </span>
               </div>
 
               <p className="mt-1 sm:mt-1.5">Gema Adi Perwira</p>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </section>

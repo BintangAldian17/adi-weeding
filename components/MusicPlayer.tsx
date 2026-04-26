@@ -7,6 +7,10 @@ interface MusicPlayerProps {
   isPlaying: boolean;
 }
 
+const TARGET_VOLUME = 0.6;
+const START_VOLUME = 0.08;
+const FADE_DURATION = 5000;
+
 export default function MusicPlayer({
   isPlaying: initialPlayState,
 }: MusicPlayerProps) {
@@ -22,12 +26,12 @@ export default function MusicPlayer({
   }, []);
 
   const fadeInAudio = useCallback(
-    (duration = 10000) => {
+    (duration = FADE_DURATION) => {
       const audio = audioRef.current;
       if (!audio) return;
 
       stopFade();
-      audio.volume = 0.25;
+      audio.volume = START_VOLUME;
 
       audio
         .play()
@@ -38,11 +42,13 @@ export default function MusicPlayer({
 
           const updateVolume = (now: number) => {
             const progress = Math.min((now - start) / duration, 1);
-            audio.volume = progress;
+            audio.volume =
+              START_VOLUME + (TARGET_VOLUME - START_VOLUME) * progress;
 
             if (progress < 1) {
               fadeFrameRef.current = requestAnimationFrame(updateVolume);
             } else {
+              audio.volume = TARGET_VOLUME;
               fadeFrameRef.current = null;
             }
           };
@@ -58,7 +64,7 @@ export default function MusicPlayer({
   );
 
   const playMusic = useCallback(() => {
-    fadeInAudio(10000);
+    fadeInAudio();
   }, [fadeInAudio]);
 
   useEffect(() => {
@@ -76,25 +82,9 @@ export default function MusicPlayer({
       audio.pause();
       setIsPlaying(false);
     } else {
-      fadeInAudio(10000);
+      fadeInAudio();
     }
   };
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const handleEnded = () => {
-      audio.currentTime = 0;
-      fadeInAudio(10000); // fade-in lagi setiap pengulangan
-    };
-
-    audio.addEventListener("ended", handleEnded);
-
-    return () => {
-      audio.removeEventListener("ended", handleEnded);
-    };
-  }, [fadeInAudio]);
 
   useEffect(() => {
     return () => {
@@ -104,7 +94,7 @@ export default function MusicPlayer({
 
   return (
     <div className="fixed lg:bottom-6 lg:right-6 md:bottom-4 md:right-4 bottom-2 right-2 z-50 p-safe">
-      <audio ref={audioRef} src="/audio/music1.mp3" />
+      <audio ref={audioRef} src="/audio/music1.mp3" loop playsInline />
 
       <button
         onClick={toggleMusic}
