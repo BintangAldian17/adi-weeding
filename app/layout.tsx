@@ -3,7 +3,7 @@ import { Alex_Brush, EB_Garamond, Alegreya } from "next/font/google";
 import "./globals.css";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://adi-wedding.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://adi-weeding.vercel.app";
 
 const siteTitle = "The Wedding of Devi & Adi";
 
