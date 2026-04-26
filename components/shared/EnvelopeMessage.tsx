@@ -26,7 +26,7 @@ export default function EnvelopeMessage({
   return (
     <div className="relative">
       <Image
-        src="/images/envelope-message.png"
+        src="/images/envelope-message.webp"
         alt="Gallery"
         width={411}
         height={455}

@@ -107,7 +107,7 @@ export default function Quote() {
         <h2
           data-quote-anim
           data-quote-title
-          className="will-change-transform font-alex-brush text-[40px] opacity-0 leading-none xl:text-[88px]"
+          className="will-change-transform font-alex-brush text-[clamp(2.5rem,7vw,5.5rem)] leading-none opacity-0"
         >
           Devi & Adi
         </h2>
@@ -115,7 +115,7 @@ export default function Quote() {
         <p
           data-quote-anim
           data-quote-body
-          className="will-change-transform mt-8 text-base leading-relaxed opacity-0 xl:mt-12 xl:text-[32px] xl:leading-[1.5]"
+          className="will-change-transform mt-8 text-sm leading-relaxed opacity-0 sm:text-base lg:text-[1.375rem] xl:mt-12 xl:text-[32px] xl:leading-[1.5]"
         >
           “Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan
           pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa
@@ -127,7 +127,7 @@ export default function Quote() {
         <p
           data-quote-anim
           data-quote-source
-          className="will-change-transform mt-8 text-lg xl:text-[32px] opacity-0"
+          className="will-change-transform mt-8 text-base opacity-0 sm:text-lg lg:text-2xl xl:text-[32px]"
         >
           QS. Ar-Rum : 21
         </p>
@@ -136,7 +136,7 @@ export default function Quote() {
           <Image
             data-quote-anim
             data-quote-ornament
-            src="/images/mini-frame.png"
+            src="/images/mini-frame.webp"
             alt="mini-frame"
             width={340}
             height={28}
@@ -146,7 +146,7 @@ export default function Quote() {
           <span
             data-quote-anim
             data-quote-ornament
-            className="will-change-transform text-base xl:text-[32px]"
+            className="will-change-transform text-sm sm:text-base lg:text-2xl xl:text-[32px]"
           >
             Lorem Ipsum
           </span>
@@ -154,7 +154,7 @@ export default function Quote() {
           <Image
             data-quote-anim
             data-quote-ornament
-            src="/images/mini-frame.png"
+            src="/images/mini-frame.webp"
             alt="mini-frame"
             width={340}
             height={28}

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Cover({
   onOpen,
@@ -11,45 +11,6 @@ export default function Cover({
   guestName: string;
 }) {
   const [open, setOpen] = useState(false);
-  const [tipY, setTipY] = useState({ top: 55, bottom: 45 }); // dalam vh
-
-  useEffect(() => {
-    const calculate = () => {
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-      const flapH = vh * 0.55;
-
-      let tipTopPx: number;
-      let tipBottomPx: number;
-
-      if (vw >= 1280) {
-        // xl: SVG width=100%, height=auto → rendered height = vw * (575/1440)
-        const svgRenderedH = vw * (575 / 1440);
-        // Flap atas: rotate-180, absolute bottom-0 → puncak dari top layar:
-        tipTopPx = flapH - svgRenderedH;
-        // tapi kalau SVG lebih tinggi dari flapH, puncak terpotong → pakai 0
-        tipTopPx = Math.max(0, tipTopPx);
-
-        // Flap bawah: absolute top-0 → puncak dari top layar:
-        tipBottomPx = vh - flapH + svgRenderedH;
-        // kalau melewati batas bawah, clamp
-        tipBottomPx = Math.min(vh, tipBottomPx);
-      } else {
-        // mobile: object-cover, puncak selalu di batas flap
-        tipTopPx = flapH;
-        tipBottomPx = vh - flapH;
-      }
-
-      setTipY({
-        top: (tipTopPx / vh) * 100,
-        bottom: (tipBottomPx / vh) * 100,
-      });
-    };
-
-    calculate();
-    window.addEventListener("resize", calculate);
-    return () => window.removeEventListener("resize", calculate);
-  }, []);
 
   const handleClick = () => {
     setOpen(true);
@@ -57,173 +18,140 @@ export default function Cover({
   };
 
   return (
-    <section className="fixed inset-0 z-[999] overflow-hidden bg-transparent h-screen max-h-screen text-text-gold">
-      {/* GROUP ATAS */}
-      <Image
-        src="/images/bg-accent2.png"
-        alt="envelope top"
-        fill
-        priority
-        className="w-full h-full object-cover absolute inset-0 mix-blend-lighten"
-      />
+    <section className="fixed inset-0 z-[9999] min-h-screen overflow-hidden  text-text-gold ">
+      {/* =========================
+          GROUP ATAS (50%)
+      ========================= */}
       <div
-        className={`absolute inset-x-0 top-0 z-40 h-[55vh]
-        transition-transform duration-2200 ease-[cubic-bezier(0.22,1,0.36,1)]
+        className={`absolute inset-x-0 top-0 z-40 h-[59%] md:h-[61%]
+        transition-transform duration-[2200ms] ease-[cubic-bezier(0.22,1,0.36,1)]
         ${open ? "-translate-y-[130%]" : "translate-y-0"}`}
       >
+        {/* MOBILE */}
         <Image
-          src="/images/bg-accent2.png"
-          alt="Gallery"
-          width={1440}
-          height={1918}
-          className="absolute h-full w-full object-cover mix-blend-multiply z-20"
+          src="/cover-up.svg"
+          alt="envelope top mobile"
+          fill
+          priority
+          className="object-cover object-bottom md:hidden"
         />
-        <div className="absolute inset-0 xl:hidden">
-          <Image
-            src="/emvelop.svg"
-            alt="envelope top"
-            fill
-            priority
-            className="rotate-180 object-cover object-bottom drop-shadow-[0_8px_12px_rgba(0,0,0,0.25)]"
-          />
-        </div>
-        <div className="absolute inset-0 hidden xl:block">
-          <Image
-            src="/emvelop.svg"
-            alt="envelope top"
-            width={1440}
-            height={575}
-            priority
-            className="absolute bottom-0 left-1/2 h-auto w-full max-w-none -translate-x-1/2 rotate-180 drop-shadow-[0_8px_12px_rgba(0,0,0,0.25)]"
-          />
-        </div>
-        <div className="absolute w-full h-full z-20 flex flex-col items-center justify-center  xl:gap-6 gap-5">
-          <p className=" font-eb-garamond text-xs leading-none tracking-widest uppercase md:text-xl">
+
+        {/* DESKTOP */}
+        <Image
+          src="/cover-up-2.svg"
+          alt="envelope top desktop"
+          fill
+          priority
+          className="hidden object-cover object-bottom md:block"
+        />
+
+        {/* CONTENT */}
+        <div className="absolute z-40 flex h-full w-full flex-col items-center justify-center gap-5 xl:gap-6">
+          <p className="font-eb-garamond text-xs uppercase tracking-widest md:text-xl">
             the wedding of
           </p>
-          <h1 className=" xl:space-x-[50px] space-x-5">
-            <span className="font-alex-brush xl:text-[80px] text-[40px] leading-none">
+
+          <h1 className="space-x-5 xl:space-x-[50px] leading-none">
+            <span className="font-alex-brush text-[40px] xl:text-[80px]">
               Devi
             </span>
-            <span className="font-alegreya font-thin xl:text-[64px] text-2xl leading-none">
+            <span className="font-alegreya text-2xl font-thin xl:text-[64px]">
               &
             </span>
-            <span className="font-alex-brush xl:text-[80px] text-[40px] leading-none">
+            <span className="font-alex-brush text-[40px] xl:text-[80px]">
               Adi
             </span>
           </h1>
-          <div className="flex flex-col items-center justify-center gap-2 md:gap-4 ">
+
+          <div className="flex flex-col items-center gap-2 md:gap-4">
             <Image
-              data-hero-anim
-              src="/images/mini-frame.png"
-              alt="mini-frame"
+              src="/images/mini-frame.webp"
+              alt="frame"
               width={195}
               height={16}
-              className="h-auto w-[135px]   md:w-[195px]"
+              className="w-[135px] md:w-[195px]"
             />
 
-            <time
-              data-hero-anim
-              dateTime="2026-05-31"
-              className="  md:text-2xl"
-            >
+            <time dateTime="2026-05-31" className="md:text-2xl">
               31 Mei 2026
             </time>
 
             <Image
-              data-hero-anim
-              src="/images/mini-frame.png"
-              alt="mini-frame"
+              src="/images/mini-frame.webp"
+              alt="frame"
               width={195}
               height={16}
-              className="h-auto w-[135px]  rotate-180  md:w-[195px]"
+              className="w-[135px] rotate-180 md:w-[195px]"
             />
           </div>
         </div>
 
+        {/* COIN */}
         <Image
-          src="/images/coin.png"
-          alt="gift coin"
-          width={207}
-          height={198}
-          className="absolute -bottom-20 left-1/2 -translate-x-1/2"
+          src="/images/coin.webp"
+          alt="coin"
+          width={1024}
+          height={904}
+          className="
+            absolute left-1/2 bottom-0 z-50
+            -translate-x-1/2 translate-y-1/2
+            h-auto w-[200px] md:w-[250px] xl:w-[350px]
+          "
         />
       </div>
 
-      {/* GROUP BAWAH */}
+      {/* =========================
+          GROUP BAWAH (50%)
+      ========================= */}
       <div
-        className={`absolute inset-0 z-30 
-        transition-transform duration-2000 ease-[cubic-bezier(0.22,1,0.36,1)]
+        className={`absolute inset-x-0 bottom-0 z-30 h-[90%]  md:h-full xl:h-[115%] overflow-hidden
+        transition-transform duration-[2000ms] ease-[cubic-bezier(0.22,1,0.36,1)]
         ${open ? "translate-y-full" : "translate-y-0"}`}
       >
+        {/* MOBILE */}
         <Image
-          src="/images/bg-accent2.png"
-          alt="Gallery"
-          width={1440}
-          height={1918}
-          className="absolute h-full w-full object-cover mix-blend-multiply z-20"
-        />
-        {/* SEGITIGA KIRI */}
-        <div
-          className="absolute inset-0"
-          style={{
-            clipPath: `polygon(0 0, 0 100%, 50% ${tipY.bottom}%, 50% ${tipY.top}%)`,
-            backgroundColor: "#5c0d1a",
-          }}
+          src="/cover-bottom.svg"
+          alt="envelope bottom mobile"
+          fill
+          priority
+          className="object-cover object-top md:hidden"
         />
 
-        {/* SEGITIGA KANAN */}
-        <div
-          className="absolute inset-0"
-          style={{
-            clipPath: `polygon(100% 0, 100% 100%, 50% ${tipY.bottom}%, 50% ${tipY.top}%)`,
-            backgroundColor: "#5c0d1a",
-          }}
+        {/* DESKTOP */}
+        <Image
+          src="/cover-bottom-stable-2.svg"
+          alt="envelope bottom desktop"
+          fill
+          priority
+          className="hidden object-cover object-top md:block"
         />
 
-        {/* FLAP BAWAH */}
-        <div className="absolute inset-x-0 bottom-0 h-[55vh] overflow-hidden  flex items-center justify-center">
-          <div className="absolute inset-0 xl:hidden">
-            <Image
-              src="/emvelop.svg"
-              alt="envelope bottom"
-              fill
-              className="object-cover object-top drop-shadow-[0_-8px_12px_rgba(0,0,0,0.25)]"
-            />
-          </div>
-          <div className="flex flex-col items-center justify-center gap-6 relative z-20">
-            <p className="md:text-lg text-xs leading-none uppercase tracking-widest">
+        {/* CONTENT */}
+        <div className="absolute inset-0 translate-y-1/3 z-40 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-6">
+            <p className="text-xs uppercase tracking-widest md:text-lg">
               Dear,
             </p>
+
             <div className="text-center">
-              <h2 className="md:text-[32px] text-lg leading-none mb-4">
-                {guestName}
-              </h2>
+              <h2 className="mb-4 text-lg md:text-[32px]">{guestName}</h2>
+
               <Image
-                data-hero-anim
-                src="/images/mini-frame.png"
-                alt="mini-frame"
+                src="/images/mini-frame.webp"
+                alt="frame"
                 width={195}
                 height={16}
-                className="h-auto w-[135px]  md:w-[195px] rotate-x-180"
+                className="w-[135px] md:w-[195px]"
               />
             </div>
           </div>
-          <div className="absolute inset-0 hidden xl:block">
-            <Image
-              src="/emvelop.svg"
-              alt="envelope bottom"
-              width={1440}
-              height={575}
-              className="absolute top-0 left-1/2 h-auto w-full max-w-none -translate-x-1/2 drop-shadow-[0_-8px_12px_rgba(0,0,0,0.25)]"
-            />
-          </div>
         </div>
       </div>
 
+      {/* CLICK AREA */}
       <button
         onClick={handleClick}
-        className="absolute inset-0 z-[60]"
+        className="absolute inset-0 z-[60] w-full h-full "
         aria-label="Open invitation"
       />
     </section>

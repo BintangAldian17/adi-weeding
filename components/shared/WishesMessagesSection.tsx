@@ -40,7 +40,7 @@ export default function WishesMessagesSection({
   return (
     <div className="relative h-full w-full bg-secondary">
       <Image
-        src="/images/bg-accent2.png"
+        src="/images/bg-accent2.webp"
         alt="Gallery"
         width={1440}
         height={1918}
@@ -48,7 +48,7 @@ export default function WishesMessagesSection({
       />
       <Image
         data-wishes-list-anim
-        src="/images/ornamet-wishes.png"
+        src="/images/ornamet-wishes.webp"
         alt="Gallery"
         width={375}
         height={678}
@@ -56,14 +56,14 @@ export default function WishesMessagesSection({
       />
       <Image
         data-wishes-list-anim
-        src="/images/ornamet-wishes.png"
+        src="/images/ornamet-wishes.webp"
         alt="Gallery"
         width={375}
         height={678}
-        className="absolute right-0 bottom-0 hidden translate-x-[-72px] rotate-20 rotate-y-180 xl:block xl:h-[443px] xl:w-[246px]"
+        className="absolute bottom-0 -right-36 hidden -rotate-20 xl:block xl:h-[443px] xl:w-[246px] rotate-x-180"
       />
       <div className="flex flex-col items-center justify-center gap-10 py-10 xl:gap-[100px] xl:px-11 xl:py-[100px]">
-        <div className="grid h-full w-full grid-cols-1 place-items-center gap-9 px-10 py-10 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid h-full w-full grid-cols-1 place-items-center gap-9 md:px-10 px-4 py-10 md:grid-cols-2 xl:grid-cols-4">
           {wishes.map((wish) => (
             <div key={wish.id} data-wishes-card>
               <EnvelopeMessage

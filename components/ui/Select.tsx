@@ -55,7 +55,7 @@ export default function Select({
       {name ? <input type="hidden" name={name} value={value} /> : null}
 
       <Image
-        src="/images/ornament-input.png"
+        src="/images/ornament-input.webp"
         alt=""
         width={19}
         height={26}
@@ -63,7 +63,7 @@ export default function Select({
         className="pointer-events-none absolute top-[18px] -left-1 z-10 -translate-y-1/2"
       />
       <Image
-        src="/images/ornament-input.png"
+        src="/images/ornament-input.webp"
         alt=""
         width={19}
         height={26}

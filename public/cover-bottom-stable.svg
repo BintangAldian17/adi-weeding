@@ -1,0 +1,41 @@
+<svg width="1506" height="1024" viewBox="0 0 1506 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Bottom envelope group.
+    The top-flap shape is subtracted ONLY from the back rectangle.
+    The front/bottom flap is drawn after it, so the rounded tip is preserved.
+  -->
+  <defs>
+    <mask id="back-cut-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1506" height="1024">
+      <rect x="0" y="0" width="1506" height="1024" fill="white"/>
+      <path d="M0 0L694.066 590.722C727.038 621.91 778.605 621.91 811.576 590.722L1505.64 0H0Z" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Back rectangle, cropped only by the top flap -->
+  <g mask="url(#back-cut-mask)">
+    <rect width="1506" height="1024" fill="#620B1A"/>
+
+    <!-- Left and right back folds -->
+    <path d="M0 0L694.066 590.722L0 1024V0Z" fill="#5E0D1B" fill-opacity="0.36"/>
+    <path d="M1506 0L811.576 590.722L1506 1024V0Z" fill="#5E0D1B" fill-opacity="0.36"/>
+
+    <!-- Back fold lines -->
+    <path d="M0 0L694.066 590.722" stroke="#3F0611" stroke-opacity="0.22" stroke-width="2"/>
+    <path d="M1505.64 0L811.576 590.722" stroke="#3F0611" stroke-opacity="0.22" stroke-width="2"/>
+  </g>
+
+  <!-- Front/bottom triangle: NOT cropped, so the rounded tip remains intact -->
+  <path
+    d="M0 1024L658 548C684 528 707 514 733 510C746 508 760 508 773 510C799 514 822 528 848 548L1506 1024H0Z"
+    fill="#620B1A"
+  />
+
+  <!-- Front flap subtle edge line -->
+  <path
+    d="M0 1024L658 548C684 528 707 514 733 510C746 508 760 508 773 510C799 514 822 528 848 548L1506 1024"
+    stroke="#3F0611"
+    stroke-opacity="0.24"
+    stroke-width="2"
+    fill="none"
+  />
+</svg>

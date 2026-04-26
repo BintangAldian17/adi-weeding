@@ -9,16 +9,14 @@ function nextImageUrl(src: string, width: number) {
 }
 
 const PRELOAD_ASSETS: string[] = [
-  nextImageUrl("/emvelop.svg", 1440),
-  nextImageUrl("/images/bg-accent2.png", 1920),
-  nextImageUrl("/images/hero2.png", 1920),
-  nextImageUrl("/images/side-frame.png", 828),
-  nextImageUrl("/images/accent-flower.png", 828),
-  nextImageUrl("/images/accent-flower2.png", 828),
-  nextImageUrl("/images/accent-flower3.png", 828),
-  nextImageUrl("/images/mini-frame.png", 828),
-  nextImageUrl("/images/coin.png", 828),
-  nextImageUrl("/images/logo.png", 96),
+  nextImageUrl("/cover-up.svg", 1440),
+  nextImageUrl("/cover-up-2.svg", 1920),
+  nextImageUrl("/cover-bottom.svg", 1440),
+  nextImageUrl("/cover-bottom-stable.svg", 1440),
+  nextImageUrl("/cover-bottom-stable-2.svg", 1920),
+  nextImageUrl("/images/mini-frame.webp", 828),
+  nextImageUrl("/images/coin.webp", 828),
+  nextImageUrl("/images/logo.webp", 96),
 ];
 
 async function preloadAsset(src: string): Promise<void> {
@@ -37,25 +35,46 @@ export default function SplashScreen({ onReady }: { onReady: () => void }) {
   useEffect(() => {
     let loaded = 0;
     const total = PRELOAD_ASSETS.length;
+    let mounted = true;
+    let rafId = 0;
+    let visualProgress = 0;
+    let targetProgress = 8;
+
+    const animateProgress = () => {
+      if (!mounted) return;
+
+      visualProgress += (targetProgress - visualProgress) * 0.12;
+
+      if (Math.abs(targetProgress - visualProgress) < 0.4) {
+        visualProgress = targetProgress;
+      }
+
+      setProgress(Math.round(visualProgress));
+      rafId = window.requestAnimationFrame(animateProgress);
+    };
 
     const run = async () => {
+      animateProgress();
+
       await Promise.all(
         PRELOAD_ASSETS.map((src) =>
           preloadAsset(src).then(() => {
             loaded++;
-            setProgress(Math.round((loaded / total) * 100));
+            targetProgress = Math.min(
+              92,
+              Math.round((loaded / total) * 100),
+            );
           }),
         ),
       );
 
-      // Tunggu fonts
       try {
         await document.fonts.ready;
       } catch {
-        // ignore
+        // ignore font loading failure
       }
 
-      setProgress(100);
+      targetProgress = 100;
       await new Promise((r) => setTimeout(r, 400));
       setHiding(true);
       await new Promise((r) => setTimeout(r, 700));
@@ -63,6 +82,13 @@ export default function SplashScreen({ onReady }: { onReady: () => void }) {
     };
 
     run();
+
+    return () => {
+      mounted = false;
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
   }, [onReady]);
 
   return (
@@ -73,7 +99,7 @@ export default function SplashScreen({ onReady }: { onReady: () => void }) {
     >
       <div className="flex flex-col items-center gap-8">
         <Image
-          src="/images/logo.png"
+          src="/images/logo.webp"
           alt="logo"
           width={43}
           height={41}

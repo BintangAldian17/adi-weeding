@@ -34,14 +34,14 @@ export default function WishesForm({
       <div className="relative flex-1 px-4 py-10 md:flex-1/2">
         <Image
           data-wishes-form-anim
-          src="/images/mini-frame.png"
+          src="/images/mini-frame.webp"
           alt="Gallery"
           width={341}
           height={28}
           className="absolute top-10 left-1/2 h-auto w-[196px] -translate-x-1/2 xl:top-[110px] xl:w-[372px]"
         />
         <Image
-          src="/images/bg-event-2.png"
+          src="/images/bg-event-2.webp"
           alt="Gallery"
           width={1104}
           height={928}
@@ -68,14 +68,14 @@ export default function WishesForm({
             >
               <div data-wishes-form-anim className="relative w-full px-4">
                 <Image
-                  src="/images/ornament-input.png"
+                  src="/images/ornament-input.webp"
                   alt="Gallery"
                   width={19}
                   height={26}
                   className="absolute -left-1 top-1/2 -translate-y-1/2"
                 />
                 <Image
-                  src="/images/ornament-input.png"
+                  src="/images/ornament-input.webp"
                   alt="Gallery"
                   width={19}
                   height={26}
@@ -102,14 +102,14 @@ export default function WishesForm({
               />
               <div data-wishes-form-anim className="relative w-full px-4">
                 <Image
-                  src="/images/ornament-input.png"
+                  src="/images/ornament-input.webp"
                   alt="Gallery"
                   width={19}
                   height={26}
                   className="absolute -left-1 top-1/2 -translate-y-1/2"
                 />
                 <Image
-                  src="/images/ornament-input.png"
+                  src="/images/ornament-input.webp"
                   alt="Gallery"
                   width={19}
                   height={26}

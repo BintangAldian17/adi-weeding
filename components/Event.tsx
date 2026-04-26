@@ -417,82 +417,82 @@ export default function Event() {
   return (
     <section ref={rootRef} className="relative h-full w-full bg-primary">
       <Image
-        src="/images/bg-event-2.png"
+        src="/images/bg-event-2.webp"
         alt="Gallery"
         width={1104}
         height={928}
         className="absolute top-0 left-1/2 -translate-x-1/2"
       />
       <Image
-        src="/images/bg-event-2.png"
+        src="/images/bg-event-2.webp"
         alt="Gallery"
         width={1104}
         height={928}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       />
       <Image
-        src="/images/bg-event-2.png"
+        src="/images/bg-event-2.webp"
         alt="Gallery"
         width={1104}
         height={928}
         className="absolute bottom-0 left-1/2 -translate-x-1/2"
       />
       <Image
-        src="/images/side-frame.png"
+        src="/images/side-frame.webp"
         alt="Gallery"
         width={353}
         height={1096}
-        className="absolute top-10 left-0 h-[498px] w-[161px] xl:top-[100px] xl:h-[1096px] xl:w-[353px]"
+        className="absolute top-10 left-0 h-[360px] w-[116px] sm:h-[498px] sm:w-[161px] lg:top-14 lg:h-[760px] lg:w-[245px] xl:top-[100px] xl:h-[1096px] xl:w-[353px]"
       />
 
       <Image
-        src="/images/side-frame.png"
+        src="/images/side-frame.webp"
         alt="Gallery"
         width={353}
         height={1096}
-        className="absolute top-10 right-0 h-[498px] w-[161px] rotate-y-180 xl:top-[100px] xl:h-[1096px] xl:w-[353px]"
+        className="absolute top-10 right-0 h-[360px] w-[116px] rotate-y-180 sm:h-[498px] sm:w-[161px] lg:top-14 lg:h-[760px] lg:w-[245px] xl:top-[100px] xl:h-[1096px] xl:w-[353px]"
       />
       <Image
-        src="/images/mini-frame.png"
+        src="/images/mini-frame.webp"
         alt="Gallery"
         width={353}
         height={1096}
-        className="absolute top-10 left-1/2 h-auto w-[196px] -translate-x-1/2 xl:top-[110px] xl:w-[353px]"
+        className="absolute top-10 left-1/2 h-auto w-[160px] -translate-x-1/2 sm:w-[196px] lg:top-14 lg:w-[280px] xl:top-[110px] xl:w-[353px]"
       />
       <Image
-        src="/images/side-frame.png"
+        src="/images/side-frame.webp"
         alt="Gallery"
         width={353}
         height={1096}
-        className="absolute bottom-10 left-0 h-[498px] w-[161px] rotate-x-180 xl:bottom-[100px] xl:h-[1096px] xl:w-[353px]"
+        className="absolute bottom-10 left-0 h-[360px] w-[116px] rotate-x-180 sm:h-[498px] sm:w-[161px] lg:bottom-14 lg:h-[760px] lg:w-[245px] xl:bottom-[100px] xl:h-[1096px] xl:w-[353px]"
       />
       <Image
-        src="/images/side-frame.png"
+        src="/images/side-frame.webp"
         alt="Gallery"
         width={353}
         height={1096}
-        className="absolute right-0 bottom-10 h-[498px] w-[161px] rotate-y-180 rotate-x-180 xl:bottom-[100px] xl:h-[1096px] xl:w-[353px]"
+        className="absolute right-0 bottom-10 h-[360px] w-[116px] rotate-y-180 rotate-x-180 sm:h-[498px] sm:w-[161px] lg:bottom-14 lg:h-[760px] lg:w-[245px] xl:bottom-[100px] xl:h-[1096px] xl:w-[353px]"
       />
       <Image
-        src="/images/mini-frame.png"
+        src="/images/mini-frame.webp"
         alt="Gallery"
         width={353}
         height={1096}
-        className="absolute bottom-10 left-1/2 h-auto w-[196px] -translate-x-1/2 rotate-180 xl:bottom-[110px] xl:w-[353px]"
+        className="absolute bottom-10 left-1/2 h-auto w-[160px] -translate-x-1/2 rotate-180 sm:w-[196px] lg:bottom-14 lg:w-[280px] xl:bottom-[110px] xl:w-[353px]"
       />
 
-      <div className="container px-[15px] pt-32 pb-[112px] text-secondary xl:pt-44 xl:pb-[273px]">
+      <div className="container px-[15px] pt-28 pb-24 text-secondary sm:pt-32 sm:pb-[112px] lg:pt-36 lg:pb-40 xl:pt-44 xl:pb-[273px]">
         <div ref={introRef}>
           <h2
             data-event-header="main"
-            className="text-center font-alex-brush text-[40px] will-change-transform xl:text-[88px]"
+            className="text-center font-alex-brush text-[clamp(2.5rem,7vw,5.5rem)] will-change-transform"
           >
             Save The Date
           </h2>
 
           <p
             data-event-desc="main"
-            className="px-12 pt-5 text-center leading-none will-change-transform xl:px-0 xl:pt-[72px] xl:text-[32px]"
+            className="px-6 pt-5 text-center text-sm leading-relaxed will-change-transform sm:px-12 sm:text-base lg:px-0 lg:pt-10 lg:text-[1.375rem] xl:pt-[72px] xl:text-[32px] xl:leading-[1.35]"
           >
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry&apos;s standard dummy text
@@ -502,101 +502,101 @@ export default function Event() {
 
         <div
           ref={dateSectionRef}
-          className="mt-10 flex items-center justify-between gap-0 px-2.5 xl:mt-[72px] xl:justify-center xl:gap-[72px] xl:px-0"
+          className="mt-10 grid grid-cols-3 items-start gap-3 px-1 sm:mt-12 sm:gap-5 sm:px-3 lg:mt-16 lg:gap-10 xl:mt-[72px] xl:justify-center xl:gap-[72px] xl:px-0"
         >
-          <div className="flex flex-col items-center justify-center gap-2 xl:gap-4">
+          <div className="flex flex-col items-center justify-center gap-2 lg:gap-3 xl:gap-4">
             <Image
               data-event-frame-top
-              src="/images/mini-frame.png"
+              src="/images/mini-frame.webp"
               alt="mini-frame"
               width={340}
               height={28}
-              className="w-[102px] will-change-transform xl:w-[340px]"
+              className="w-[92px] will-change-transform sm:w-[120px] lg:w-[220px] xl:w-[340px]"
             />
             <span
               data-event-static-num
-              className="text-sm will-change-transform xl:text-[40px]"
+              className="text-center text-[11px] leading-tight will-change-transform sm:text-sm lg:text-xl xl:text-[40px]"
             >
               Minggu
             </span>
             <Image
               data-event-frame-bottom
-              src="/images/mini-frame.png"
+              src="/images/mini-frame.webp"
               alt="mini-frame"
               width={340}
               height={28}
-              className="w-[102px] rotate-180 will-change-transform xl:w-[340px]"
+              className="w-[92px] rotate-180 will-change-transform sm:w-[120px] lg:w-[220px] xl:w-[340px]"
             />
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-2 xl:gap-4">
+          <div className="flex flex-col items-center justify-center gap-2 lg:gap-3 xl:gap-4">
             <span
               data-event-static-num
-              className="text-[18px] will-change-transform xl:text-[48px]"
+              className="text-[16px] leading-none will-change-transform sm:text-[18px] lg:text-[30px] xl:text-[48px]"
             >
               Mei
             </span>
             <span
               ref={dayCounterRef}
-              className="text-[28px] leading-none font-bold will-change-transform xl:text-[132px]"
+              className="text-[32px] leading-none font-bold will-change-transform sm:text-[40px] lg:text-[80px] xl:text-[132px]"
             >
               0
             </span>
             <span
               data-event-static-num
-              className="text-[18px] will-change-transform xl:text-[48px]"
+              className="text-[16px] leading-none will-change-transform sm:text-[18px] lg:text-[30px] xl:text-[48px]"
             >
               2026
             </span>
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-2 xl:gap-4">
+          <div className="flex flex-col items-center justify-center gap-2 lg:gap-3 xl:gap-4">
             <Image
               data-event-frame-top
-              src="/images/mini-frame.png"
+              src="/images/mini-frame.webp"
               alt="mini-frame"
               width={340}
               height={28}
-              className="w-[102px] will-change-transform xl:w-[340px]"
+              className="w-[92px] will-change-transform sm:w-[120px] lg:w-[220px] xl:w-[340px]"
             />
             <span
               data-event-static-num
-              className="text-sm will-change-transform xl:text-[40px]"
+              className="text-center text-[11px] leading-tight will-change-transform sm:text-sm lg:text-xl xl:text-[40px]"
             >
               12:00 - 15:00 WIB
             </span>
             <Image
               data-event-frame-bottom
-              src="/images/mini-frame.png"
+              src="/images/mini-frame.webp"
               alt="mini-frame"
               width={340}
               height={28}
-              className="w-[102px] rotate-180 will-change-transform xl:w-[340px]"
+              className="w-[92px] rotate-180 will-change-transform sm:w-[120px] lg:w-[220px] xl:w-[340px]"
             />
           </div>
         </div>
 
         <div
           ref={locationSectionRef}
-          className="mt-10 flex flex-col items-center justify-center gap-4 xl:mt-[72px] xl:gap-10"
+          className="mt-10 flex flex-col items-center justify-center gap-4 sm:mt-12 sm:gap-5 lg:mt-16 lg:gap-7 xl:mt-[72px] xl:gap-10"
         >
           <h3
             data-event-header="location"
-            className="text-[28px] leading-none will-change-transform xl:text-[56px]"
+            className="text-[clamp(1.75rem,4.5vw,3.5rem)] leading-none will-change-transform"
           >
             Lokasi
           </h3>
 
-          <div className="flex flex-col items-center justify-center gap-4">
+          <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 lg:gap-5">
             <p
               data-event-desc="location"
-              className="text-center leading-none will-change-transform xl:text-[40px]"
+              className="max-w-[18rem] text-center text-lg leading-tight will-change-transform sm:max-w-[26rem] sm:text-2xl lg:max-w-[42rem] lg:text-[2rem] xl:text-[40px]"
             >
               GEDUNG CAKRAWALA LANUD ABDULRACHMAN SALEH
             </p>
             <p
               data-event-desc="location"
-              className="text-center text-sm will-change-transform xl:text-[32px]"
+              className="max-w-[18rem] text-center text-sm leading-relaxed will-change-transform sm:max-w-[24rem] sm:text-base lg:max-w-[40rem] lg:text-[1.375rem] xl:text-[32px]"
             >
               Jl. Krajan Saptorenggo, Kecamatan Pakis, Kabupaten Malang
             </p>
@@ -609,53 +609,56 @@ export default function Event() {
             rel="noopener noreferrer"
             className="relative will-change-transform"
           >
-            <span className="absolute top-1/2 right-1/2 flex -translate-y-[65%] translate-x-1/2 transform cursor-pointer items-center gap-2 text-[24px]">
+            <span className="absolute top-1/2 right-1/2 flex -translate-y-[62%] translate-x-1/2 transform cursor-pointer items-center gap-1.5 sm:gap-2 lg:-translate-y-[65%]">
               <Image
-                src="/images/location-icon.png"
+                src="/images/location-icon.webp"
                 alt="location-icon"
                 width={32}
                 height={32}
+                className="h-5 w-5 sm:h-6 sm:w-6 lg:h-8 lg:w-8"
               />
-              <span className="text-base xl:text-2xl">Google Maps</span>
+              <span className="text-sm sm:text-base lg:text-2xl">
+                Google Maps
+              </span>
             </span>
             <Image
-              src="/images/frame-social.png"
+              src="/images/frame-social.webp"
               alt="mini-frame"
               width={360}
               height={102}
-              className="h-auto w-[301px] xl:w-[360px]"
+              className="h-auto w-[250px] sm:w-[301px] lg:w-[330px] xl:w-[360px]"
             />
           </a>
         </div>
 
         <div
           ref={countdownSectionRef}
-          className="mt-5 flex flex-col gap-5 xl:mt-[128px] xl:gap-[72px]"
+          className="mt-8 flex flex-col gap-5 sm:mt-10 sm:gap-6 lg:mt-16 lg:gap-10 xl:mt-[128px] xl:gap-[72px]"
         >
           <h3
             data-event-header="countdown"
-            className="text-center font-alex-brush text-[40px] leading-none will-change-transform xl:text-[88px]"
+            className="text-center font-alex-brush text-[clamp(2.5rem,7vw,5.5rem)] leading-none will-change-transform"
           >
             Count the date
           </h3>
 
-          <div className="flex justify-center xl:gap-[88px]">
+          <div className="grid grid-cols-4 justify-center gap-2 sm:gap-3 lg:gap-8 xl:gap-[88px]">
             {countdownItems.map((item) => (
               <span
                 key={item.label}
                 data-event-count-card
-                className="relative md:w-[271px] md:h-[321px] w-[83px] h-[115px] will-change-transform"
+                className="relative h-[115px] w-[83px] will-change-transform sm:h-[150px] sm:w-[108px] lg:h-[240px] lg:w-[180px] xl:h-[321px] xl:w-[271px]"
               >
                 <Image
-                  src="/images/count-frame-2.png"
+                  src="/images/count-frame-2.webp"
                   alt={item.label}
                   width={271}
                   height={321}
-                  className="absolute md:w-[271px] md:h-[321px] w-[83px] h-[115px]"
+                  className="absolute h-[115px] w-[83px] sm:h-[150px] sm:w-[108px] lg:h-[240px] lg:w-[180px] xl:h-[321px] xl:w-[271px]"
                 />
-                <span className="absolute top-1/2 left-1/2 z-10 -translate-x-[40%] -translate-y-1/2 transform text-center text-[24px] leading-none font-bold text-text-dark md:text-[64px]">
+                <span className="absolute top-1/2 left-1/2 z-10 -translate-x-[40%] -translate-y-1/2 transform text-center text-[24px] leading-none font-bold text-text-dark sm:text-[30px] lg:text-[48px] xl:text-[64px]">
                   {item.value}
-                  <p className="text-[10px] md:text-2xl font-normal">
+                  <p className="text-[10px] font-normal sm:text-xs lg:text-lg xl:text-2xl">
                     {item.label}
                   </p>
                 </span>

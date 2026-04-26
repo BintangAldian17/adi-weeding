@@ -150,56 +150,56 @@ export default function Gift() {
   return (
     <section
       ref={rootRef}
-      className="w-full xl:min-h-screen min-h-[75vh] relative bg-secondary text-text-dark xl:rounded-t-[80px] rounded-t-[24px] xl:pb-[217px] pb-[172px] overflow-hidden"
+      className="relative min-h-[75vh] w-full overflow-hidden rounded-t-[24px] bg-secondary pb-36 text-text-dark sm:pb-40 lg:min-h-screen lg:rounded-t-[48px] lg:pb-48 xl:rounded-t-[80px] xl:pb-[217px]"
     >
-      <div className="absolute xl:bottom-1/2 xl:translate-y-1/2 bottom-10 left-0 z-30">
+      <div className="absolute bottom-10 left-0 z-30 lg:bottom-1/2 lg:translate-y-1/2">
         <Image
-          src="/images/accent-flower.png"
+          src="/images/accent-flower.webp"
           alt="side-frame"
           width={268}
           height={425}
-          className="xl:translate-y-60 translate-y-16  relative z-10 -translate-x-10.5 xl:w-[268px] w-[71px] h-auto"
+          className="relative z-10 h-auto w-[71px] translate-y-16 -translate-x-10.5 sm:w-[92px] lg:w-[180px] lg:translate-y-40 xl:w-[268px] xl:translate-y-60"
         />
         <Image
-          src="/images/accent-flower2.png"
+          src="/images/accent-flower2.webp"
           alt="side-frame"
           width={399}
           height={220}
-          className="xl:translate-y-25 -translate-x-10 translate-y-7 xl:w-[399px] w-[107px] h-auto"
+          className="h-auto w-[107px] translate-y-7 -translate-x-10 sm:w-[135px] lg:w-[260px] lg:translate-y-16 xl:w-[399px] xl:translate-y-25"
         />
         <Image
-          src="/images/accent-flower3.png"
+          src="/images/accent-flower3.webp"
           alt="side-frame"
           width={232}
           height={288}
-          className="relative z-10 -translate-x-10 xl:w-[232px] w-[77px] h-auto rotate-y-180"
+          className="relative z-10 h-auto w-[77px] -translate-x-10 rotate-y-180 sm:w-[96px] lg:w-[160px] xl:w-[232px]"
         />
       </div>
-      <div className="absolute xl:bottom-1/2 xl:translate-y-1/2 bottom-10 right-0 rotate-y-180">
+      <div className="absolute bottom-10 right-0 rotate-y-180 lg:bottom-1/2 lg:translate-y-1/2">
         <Image
-          src="/images/accent-flower.png"
+          src="/images/accent-flower.webp"
           alt="side-frame"
           width={268}
           height={425}
-          className="xl:translate-y-60 translate-y-16  relative z-10 -translate-x-10.5 xl:w-[268px] w-[71px] h-auto"
+          className="relative z-10 h-auto w-[71px] translate-y-16 -translate-x-10.5 sm:w-[92px] lg:w-[180px] lg:translate-y-40 xl:w-[268px] xl:translate-y-60"
         />
         <Image
-          src="/images/accent-flower2.png"
+          src="/images/accent-flower2.webp"
           alt="side-frame"
           width={399}
           height={220}
-          className="xl:translate-y-25 -translate-x-10 translate-y-7 xl:w-[399px] w-[107px] h-auto"
+          className="h-auto w-[107px] translate-y-7 -translate-x-10 sm:w-[135px] lg:w-[260px] lg:translate-y-16 xl:w-[399px] xl:translate-y-25"
         />
         <Image
-          src="/images/accent-flower3.png"
+          src="/images/accent-flower3.webp"
           alt="side-frame"
           width={232}
           height={288}
-          className="relative z-10 -translate-x-10 xl:w-[232px] w-[77px] h-auto rotate-y-180"
+          className="relative z-10 h-auto w-[77px] -translate-x-10 rotate-y-180 sm:w-[96px] lg:w-[160px] xl:w-[232px]"
         />
       </div>
       <Image
-        src="/images/bg-accent2.png"
+        src="/images/bg-accent2.webp"
         alt="bg"
         width={1440}
         height={1918}
@@ -208,22 +208,22 @@ export default function Gift() {
 
       <div
         ref={contentRef}
-        className="container xl:pt-[100px] xl:pb-[100px] pt-10 relative z-10 flex flex-col items-center justify-center xl:gap-[72px] gap-6"
+        className="container relative z-10 flex flex-col items-center justify-center gap-6 pt-10 sm:gap-8 sm:pt-12 lg:gap-12 lg:pt-16 xl:gap-[72px] xl:pt-[100px] xl:pb-[100px]"
       >
         {/* MINI FRAME */}
         <Image
           data-gift-frame
-          src="/images/mini-frame-black.png"
+          src="/images/mini-frame-black.webp"
           alt="mini-frame"
           width={398}
           height={32}
-          className="xl:w-[398px] w-[196px] h-auto will-change-transform"
+          className="h-auto w-[196px] will-change-transform sm:w-[240px] lg:w-[320px] xl:w-[398px]"
         />
 
         {/* TITLE */}
         <h2
           data-gift-title
-          className="xl:text-[88px] text-[40px] font-alex-brush will-change-transform"
+          className="font-alex-brush text-[clamp(2.5rem,7vw,5.5rem)] will-change-transform"
         >
           Wedding Gift
         </h2>
@@ -231,7 +231,7 @@ export default function Gift() {
         {/* DESC */}
         <p
           data-gift-desc
-          className="xl:text-[32px] text-center leading-none will-change-transform"
+          className="max-w-[19rem] text-center text-sm leading-relaxed will-change-transform sm:max-w-[28rem] sm:text-base lg:max-w-[44rem] lg:text-[1.375rem] xl:max-w-[58rem] xl:text-[32px] xl:leading-[1.35]"
         >
           Your blessing and coming to our wedding are enough for us. However, if
           you want to give a gift we provide a Digital Envelope to make it
@@ -241,39 +241,39 @@ export default function Gift() {
         {/* ENVELOPE */}
         <div data-gift-envelope className="relative will-change-transform">
           <Image
-            src="/images/gift-frame-2.png"
+            src="/images/gift-frame-2.webp"
             alt="gift-frame"
             width={683}
             height={491}
-            className="xl:w-[684px] w-[301px] h-auto"
+            className="h-auto w-[301px] sm:w-[380px] lg:w-[540px] xl:w-[684px]"
           />
 
           {/* INNER TEXT */}
           <div
             data-gift-inner
-            className="text-center text-text-dark absolute top-[65%] left-1/2 -translate-x-1/2 will-change-transform"
+            className="absolute top-[65%] left-1/2 w-[68%] -translate-x-1/2 text-center text-text-dark will-change-transform sm:w-[70%] lg:w-[72%]"
           >
-            <p className="xl:text-[40px] font-alex-brush leading-none">
+            <p className="font-alex-brush text-[22px] leading-none sm:text-[28px] lg:text-[34px] xl:text-[40px]">
               E-Angpao
             </p>
 
-            <div className="text-center text-sm xl:text-[32px] mt-2">
-              <div className="flex gap-3 items-center justify-center">
+            <div className="mt-1.5 text-center text-[10px] sm:mt-2 sm:text-sm lg:text-[1.375rem] xl:text-[32px]">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3">
                 <p className="font-bold leading-none">BCA - {ACCOUNT_NUMBER}</p>
                 <button
                   type="button"
                   onClick={handleCopyAccount}
-                  className="flex items-center justify-center size-4 xl:size-9 rounded-full bg-secondary transition-transform hover:scale-105"
+                  className="flex size-4 items-center justify-center rounded-full bg-secondary transition-transform hover:scale-105 sm:size-5 lg:size-7 xl:size-9"
                   aria-label="Copy nomor rekening"
                 >
                   <Icon
                     icon={copied ? "mdi:check" : "mdi:content-copy"}
-                    className="xl:size-5 size-2.5 text-text-dark"
+                    className="size-2.5 text-text-dark sm:size-3 lg:size-4 xl:size-5"
                   />
                 </button>
               </div>
 
-              <p>Gema Adi Perwira</p>
+              <p className="mt-1 sm:mt-1.5">Gema Adi Perwira</p>
             </div>
           </div>
         </div>

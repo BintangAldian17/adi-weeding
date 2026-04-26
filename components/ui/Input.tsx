@@ -18,7 +18,7 @@ export default function Input({
       )}
       style={{
         borderStyle: "solid",
-        borderImageSource: "url('/images/input-frame-2.png')",
+        borderImageSource: "url('/images/input-frame-2.webp')",
         borderImageSlice: "2 18 fill",
         borderImageWidth: "2 18",
         borderImageRepeat: "stretch",

@@ -22,7 +22,7 @@ export default function Button({
       {...props}
     >
       <Image
-        src="/images/button-frame.png"
+        src="/images/button-frame.webp"
         alt=""
         fill
         aria-hidden="true"

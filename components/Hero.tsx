@@ -224,15 +224,17 @@ export default function Hero({ isDefault = false }: { isDefault?: boolean }) {
     <section
       ref={rootRef}
       className={cn(
-        "relative h-[50vh] w-full bg-primary xl:h-screen",
-        isDefault ? "h-[70vh]" : " h-[50vh]",
+        "relative w-full  bg-primary",
+        isDefault
+          ? "min-h-[38rem] h-[72svh] sm:min-h-[42rem] lg:min-h-[48rem] xl:h-screen"
+          : "min-h-[24rem] h-[50svh] sm:min-h-[28rem] lg:min-h-[34rem] xl:h-screen",
       )}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full overflow-x-clip">
         <div className="absolute top-0 left-0 flex h-full">
-          <div className="relative h-full w-[161px] md:w-[334px]">
+          <div className="relative h-full w-[120px] sm:w-[161px] lg:w-[250px] xl:w-[334px]">
             <Image
-              src="/images/side-frame.png"
+              src="/images/side-frame.webp"
               alt="side-frame"
               fill
               className="object-contain object-left-top"
@@ -245,11 +247,11 @@ export default function Hero({ isDefault = false }: { isDefault?: boolean }) {
           >
             <div data-flower-piece className="will-change-transform">
               <Image
-                src="/images/accent-flower.png"
+                src="/images/accent-flower.webp"
                 alt="flower1"
                 width={244}
                 height={389}
-                className="h-auto w-[71px] -translate-x-5.5 translate-y-22 md:w-[244px] md:translate-y-80"
+                className="h-auto w-[54px] -translate-x-4 translate-y-14 sm:w-[71px] sm:-translate-x-5.5 sm:translate-y-22 lg:w-[160px] lg:translate-y-52 xl:w-[244px] xl:translate-y-80"
               />
             </div>
 
@@ -258,30 +260,30 @@ export default function Hero({ isDefault = false }: { isDefault?: boolean }) {
               className="relative -z-10 will-change-transform"
             >
               <Image
-                src="/images/accent-flower2.png"
+                src="/images/accent-flower2.webp"
                 alt="flower2"
                 width={364}
                 height={254}
-                className="h-auto w-[107px] -translate-x-5 translate-y-11 md:w-[364px] md:translate-y-40"
+                className="h-auto w-[82px] -translate-x-4 translate-y-8 sm:w-[107px] sm:-translate-x-5 sm:translate-y-11 lg:w-[240px] lg:translate-y-28 xl:w-[364px] xl:translate-y-40"
               />
             </div>
 
             <div data-flower-piece className="will-change-transform">
               <Image
-                src="/images/accent-flower3.png"
+                src="/images/accent-flower3.webp"
                 alt="flower3"
                 width={212}
                 height={263}
-                className="h-auto w-[62px] -translate-x-2 translate-y-4 rotate-y-180 md:w-[212px] md:translate-y-12"
+                className="h-auto w-[48px] -translate-x-1 translate-y-3 rotate-y-180 sm:w-[62px] sm:-translate-x-2 sm:translate-y-4 lg:w-[140px] lg:translate-y-8 xl:w-[212px] xl:translate-y-12"
               />
             </div>
           </div>
         </div>
 
         <div className="absolute top-0 right-0 flex h-full rotate-y-180">
-          <div className="relative h-full w-[161px] md:w-[334px]">
+          <div className="relative h-full w-[120px] sm:w-[161px] lg:w-[250px] xl:w-[334px]">
             <Image
-              src="/images/side-frame.png"
+              src="/images/side-frame.webp"
               alt="side-frame"
               fill
               className="object-contain object-left-top"
@@ -294,11 +296,11 @@ export default function Hero({ isDefault = false }: { isDefault?: boolean }) {
           >
             <div data-flower-piece className="will-change-transform">
               <Image
-                src="/images/accent-flower.png"
+                src="/images/accent-flower.webp"
                 alt="flower1"
                 width={244}
                 height={389}
-                className="h-auto w-[71px] -translate-x-5.5 translate-y-22 md:w-[244px] md:translate-y-80"
+                className="h-auto w-[54px] -translate-x-4 translate-y-14 sm:w-[71px] sm:-translate-x-5.5 sm:translate-y-22 lg:w-[160px] lg:translate-y-52 xl:w-[244px] xl:translate-y-80"
               />
             </div>
 
@@ -307,21 +309,21 @@ export default function Hero({ isDefault = false }: { isDefault?: boolean }) {
               className="relative -z-10 will-change-transform"
             >
               <Image
-                src="/images/accent-flower2.png"
+                src="/images/accent-flower2.webp"
                 alt="flower2"
                 width={364}
                 height={254}
-                className="h-auto w-[107px] -translate-x-5 translate-y-11 md:w-[364px] md:translate-y-40"
+                className="h-auto w-[82px] -translate-x-4 translate-y-8 sm:w-[107px] sm:-translate-x-5 sm:translate-y-11 lg:w-[240px] lg:translate-y-28 xl:w-[364px] xl:translate-y-40"
               />
             </div>
 
             <div data-flower-piece className="will-change-transform">
               <Image
-                src="/images/accent-flower3.png"
+                src="/images/accent-flower3.webp"
                 alt="flower3"
                 width={212}
                 height={263}
-                className="h-auto w-[62px] -translate-x-2 translate-y-4 rotate-y-180 md:w-[212px] md:translate-y-12"
+                className="h-auto w-[48px] -translate-x-1 translate-y-3 rotate-y-180 sm:w-[62px] sm:-translate-x-2 sm:translate-y-4 lg:w-[140px] lg:translate-y-8 xl:w-[212px] xl:translate-y-12"
               />
             </div>
           </div>
@@ -333,12 +335,12 @@ export default function Hero({ isDefault = false }: { isDefault?: boolean }) {
       <div className="relative z-0 h-full w-full overflow-hidden">
         <div
           className={cn(
-            "absolute inset-0 md:scale-100 ",
+            "absolute inset-0 scale-110 sm:scale-105 md:scale-100",
             !isDefault && "scale-125",
           )}
         >
           <Image
-            src="/images/hero2.png"
+            src="/images/hero2.webp"
             alt="hero-bg"
             fill
             priority
@@ -349,154 +351,156 @@ export default function Hero({ isDefault = false }: { isDefault?: boolean }) {
       </div>
 
       <Image
-        src="/images/logo.png"
+        src="/images/logo.webp"
         alt="logo"
         width={43}
         height={41}
-        className="absolute top-2 right-1/2 z-50 h-[19px] w-[19px] translate-x-1/2 xl:top-10 xl:h-[41px] xl:w-[43px]"
+        className="absolute top-2 right-1/2 z-50 h-[19px] w-[19px] translate-x-1/2 sm:top-4 sm:h-[24px] sm:w-[24px] lg:top-6 lg:h-[32px] lg:w-[32px] xl:top-10 xl:h-[41px] xl:w-[43px]"
       />
 
       <div className="absolute inset-0 z-50 flex flex-col items-center justify-center text-secondary">
         <div
           ref={textRef}
-          className="flex translate-y-[50%] flex-col items-center gap-2 md:translate-y-[30%] md:gap-6"
+          className="flex translate-y-[42%] flex-col items-center gap-3 px-4 sm:translate-y-[38%] sm:gap-4 lg:translate-y-[32%] lg:gap-5 xl:translate-y-[30%] xl:gap-6"
         >
           <p
             data-hero-anim
-            className="translate-y-6 opacity-0 font-eb-garamond text-xs leading-none tracking-widest uppercase md:text-xl"
+            className="translate-y-6 opacity-0 font-eb-garamond text-[10px] leading-none tracking-[0.3em] uppercase sm:text-xs lg:text-base xl:text-xl"
           >
             the wedding of
           </p>
 
           <h1
             data-hero-anim
-            className="flex translate-y-6 items-center gap-6 leading-none opacity-0 md:gap-[50px]"
+            className="flex translate-y-6 items-center gap-4 leading-none opacity-0 sm:gap-6 lg:gap-10 xl:gap-[50px]"
           >
-            <span className="font-alex-brush text-[40px] leading-none md:text-[120px]">
+            <span className="font-alex-brush text-[clamp(2.5rem,8vw,7.5rem)] leading-none">
               Devi
             </span>
-            <span className="font-alegreya font-thin md:text-[64px]">&</span>
-            <span className="font-alex-brush text-[40px] leading-none md:text-[120px]">
+            <span className="font-alegreya text-[clamp(1.5rem,4vw,4rem)] font-thin">
+              &
+            </span>
+            <span className="font-alex-brush text-[clamp(2.5rem,8vw,7.5rem)] leading-none">
               Adi
             </span>
           </h1>
           {isDefault ? (
-            <div className=" flex items-center justify-between gap-9 px-2.5 xl:justify-center xl:gap-[72px] xl:px-0">
-              <div className="flex flex-col items-center justify-center gap-2 xl:gap-4">
+            <div className="grid w-full max-w-[min(92vw,72rem)] grid-cols-3 items-start gap-4 px-1 sm:gap-6 sm:px-3 lg:gap-10 xl:gap-[72px] xl:px-0">
+              <div className="flex flex-col items-center justify-center gap-2 lg:gap-3 xl:gap-4">
                 <Image
                   data-hero-frame-top
-                  src="/images/mini-frame.png"
+                  src="/images/mini-frame.webp"
                   alt="mini-frame"
                   width={340}
                   height={28}
-                  className="w-[102px] will-change-transform xl:w-[305px]"
+                  className="w-[92px] will-change-transform sm:w-[120px] lg:w-[220px] xl:w-[305px]"
                 />
                 <span
                   data-hero-static-num
-                  className="text-sm will-change-transform xl:text-[32px]"
+                  className="text-center text-[11px] leading-tight will-change-transform sm:text-sm lg:text-xl xl:text-[32px]"
                 >
                   Minggu
                 </span>
                 <Image
                   data-hero-frame-bottom
-                  src="/images/mini-frame.png"
+                  src="/images/mini-frame.webp"
                   alt="mini-frame"
                   width={340}
                   height={28}
-                  className="w-[102px] rotate-180 will-change-transform xl:w-[305px]"
+                  className="w-[92px] rotate-180 will-change-transform sm:w-[120px] lg:w-[220px] xl:w-[305px]"
                 />
               </div>
 
-              <div className="flex flex-col items-center justify-center gap-2 xl:gap-4">
+              <div className="flex flex-col items-center justify-center gap-2 lg:gap-3 xl:gap-4">
                 <span
                   data-hero-static-num
-                  className="text-[18px] will-change-transform xl:text-[32px] leading-none"
+                  className="text-[16px] leading-none will-change-transform sm:text-[18px] lg:text-[26px] xl:text-[32px]"
                 >
                   Mei
                 </span>
                 <span
                   ref={dayCounterRef}
-                  className="text-[28px] leading-none font-bold will-change-transform xl:text-[80px]"
+                  className="text-[32px] leading-none font-bold will-change-transform sm:text-[40px] lg:text-[60px] xl:text-[80px]"
                 >
                   0
                 </span>
                 <span
                   data-hero-static-num
-                  className="text-[18px] will-change-transform xl:text-[32px] leading-none"
+                  className="text-[16px] leading-none will-change-transform sm:text-[18px] lg:text-[26px] xl:text-[32px]"
                 >
                   2026
                 </span>
               </div>
 
-              <div className="flex flex-col items-center justify-center gap-2 xl:gap-4">
+              <div className="flex flex-col items-center justify-center gap-2 lg:gap-3 xl:gap-4">
                 <Image
                   data-hero-frame-top
-                  src="/images/mini-frame.png"
+                  src="/images/mini-frame.webp"
                   alt="mini-frame"
                   width={340}
                   height={28}
-                  className="w-[102px] will-change-transform xl:w-[305px]"
+                  className="w-[92px] will-change-transform sm:w-[120px] lg:w-[220px] xl:w-[305px]"
                 />
                 <span
                   data-hero-static-num
-                  className="text-sm will-change-transform xl:text-[32px]"
+                  className="text-center text-[11px] leading-tight will-change-transform sm:text-sm lg:text-xl xl:text-[32px]"
                 >
                   12:00 - 15:00 WIB
                 </span>
                 <Image
                   data-hero-frame-bottom
-                  src="/images/mini-frame.png"
+                  src="/images/mini-frame.webp"
                   alt="mini-frame"
                   width={340}
                   height={28}
-                  className="w-[102px] rotate-180 will-change-transform xl:w-[305px]"
+                  className="w-[92px] rotate-180 will-change-transform sm:w-[120px] lg:w-[220px] xl:w-[305px]"
                 />
               </div>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center gap-2 md:gap-4">
+            <div className="flex flex-col items-center justify-center gap-2 sm:gap-3 lg:gap-4">
               <Image
                 data-hero-anim
-                src="/images/mini-frame.png"
+                src="/images/mini-frame.webp"
                 alt="mini-frame"
                 width={195}
                 height={16}
-                className="h-auto w-[135px] translate-y-6 opacity-0 md:w-[195px]"
+                className="h-auto w-[135px] translate-y-6 opacity-0 sm:w-[160px] lg:w-[180px] xl:w-[195px]"
               />
 
               <time
                 data-hero-anim
                 dateTime="2026-05-31"
-                className="translate-y-6 opacity-0 md:text-2xl"
+                className="translate-y-6 text-sm opacity-0 sm:text-base lg:text-xl xl:text-2xl"
               >
                 31 Mei 2026
               </time>
 
               <Image
                 data-hero-anim
-                src="/images/mini-frame.png"
+                src="/images/mini-frame.webp"
                 alt="mini-frame"
                 width={195}
                 height={16}
-                className="h-auto w-[135px] translate-y-6 rotate-180 opacity-0 md:w-[195px]"
+                className="h-auto w-[135px] translate-y-6 rotate-180 opacity-0 sm:w-[160px] lg:w-[180px] xl:w-[195px]"
               />
             </div>
           )}
           {isDefault && (
-            <div className="flex flex-col md:gap-8 gap-4 items-center justify-center xl:mt-4 mt-10">
+            <div className="mt-6 flex max-w-[min(92vw,48rem)] flex-col items-center justify-center gap-4 sm:mt-8 lg:mt-10 lg:gap-6 xl:mt-4 xl:gap-8">
               <h3
                 data-hero-default-text
-                className="uppercase md:font-bold md:text-2xl text-center leading-none will-change-transform"
+                className="text-center text-sm leading-tight font-semibold uppercase will-change-transform sm:text-base lg:text-xl xl:text-2xl"
               >
-                GEDUNG CAKRAWALA LANUD <br className="md:hidden block" />{" "}
+                GEDUNG CAKRAWALA LANUD <br className="sm:hidden block" />{" "}
                 ABDULRACHMAN SALEH
               </h3>
               <p
                 data-hero-default-text
-                className="font-normal text-center leading-none md:text-base text-sm will-change-transform"
+                className="text-center text-xs leading-relaxed font-normal will-change-transform sm:text-sm lg:text-base"
               >
                 Jl. Krajan Saptorenggo, Kecamatan Pakis,{" "}
-                <br className="md:hidden md:block" /> Kabupaten Malang
+                <br className="sm:hidden block" /> Kabupaten Malang
               </p>
             </div>
           )}

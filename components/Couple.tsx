@@ -236,50 +236,53 @@ export default function Couple() {
   return (
     <section
       ref={rootRef}
-      className="relative w-full overflow-hidden pb-[195px]"
+      className="relative w-full overflow-hidden pb-28 sm:pb-32 lg:pb-40 xl:pb-[195px]"
     >
       <div className="absolute bottom-4 left-0 z-20">
         <Image
-          src="/images/accent-flower.png"
+          src="/images/accent-flower.webp"
           alt="side-frame"
           width={268}
           height={426}
-          className="absolute -top-[100px] -z-10 h-auto w-[98px] -translate-x-8 translate-y-10 xl:w-[268px]"
+          className="absolute -top-16 -z-10 h-auto w-[72px] -translate-x-6 translate-y-8 sm:-top-20 sm:w-[98px] sm:-translate-x-8 sm:translate-y-10 lg:-top-24 lg:w-[180px] lg:translate-y-12 xl:-top-[100px] xl:w-[268px]"
         />
         <Image
-          src="/images/accent-flower3.png"
+          src="/images/accent-flower3.webp"
           alt="side-frame"
           width={212}
           height={263}
-          className="h-auto w-[77px] -translate-x-3 rotate-y-180 xl:w-[212px]"
+          className="h-auto w-[58px] -translate-x-2 rotate-y-180 sm:w-[77px] sm:-translate-x-3 lg:w-[142px] xl:w-[212px]"
         />
       </div>
 
       <div className="absolute bottom-4 right-0 z-20 rotate-y-180">
         <Image
-          src="/images/accent-flower.png"
+          src="/images/accent-flower.webp"
           alt="side-frame"
           width={268}
           height={426}
-          className="absolute -top-[100px] -z-10 h-auto w-[98px] -translate-x-8 translate-y-10 xl:w-[268px]"
+          className="absolute -top-16 -z-10 h-auto w-[72px] -translate-x-6 translate-y-8 sm:-top-20 sm:w-[98px] sm:-translate-x-8 sm:translate-y-10 lg:-top-24 lg:w-[180px] lg:translate-y-12 xl:-top-[100px] xl:w-[268px]"
         />
         <Image
-          src="/images/accent-flower3.png"
+          src="/images/accent-flower3.webp"
           alt="side-frame"
           width={212}
           height={263}
-          className="h-auto w-[77px] -translate-x-3 rotate-y-180 xl:w-[212px]"
+          className="h-auto w-[58px] -translate-x-2 rotate-y-180 sm:w-[77px] sm:-translate-x-3 lg:w-[142px] xl:w-[212px]"
         />
       </div>
 
       <div className="container flex w-full flex-col text-secondary">
-        <div className="relative flex flex-col items-center justify-center xl:flex-row xl:items-center">
+        <div className="relative flex flex-col items-center justify-center gap-10 sm:gap-12 lg:gap-16 xl:flex-row xl:items-center xl:gap-0">
           {/* LEFT / BRIDE */}
           <div className="flex w-full flex-col justify-center xl:w-1/2">
-            <div ref={bridePhotoRef}>
+            <div
+              ref={bridePhotoRef}
+              className="mx-auto w-full max-w-[18rem] sm:max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] xl:max-w-none"
+            >
               <Image
                 data-couple-photo
-                src="/images/bride-couple.png"
+                src="/images/bride-couple.webp"
                 alt="bride"
                 width={1148}
                 height={1280}
@@ -289,27 +292,27 @@ export default function Couple() {
 
             <div
               ref={brideInfoRef}
-              className="mt-12 flex flex-col items-center justify-center gap-3 xl:mt-14"
+              className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:gap-4 lg:mt-12 xl:mt-14"
             >
               <Image
                 data-couple-mini-frame
-                src="/images/mini-frame.png"
+                src="/images/mini-frame.webp"
                 alt="mini-frame"
                 width={340}
                 height={28}
-                className="h-auto w-[196px] will-change-transform xl:w-[340px]"
+                className="h-auto w-[168px] will-change-transform sm:w-[196px] lg:w-[260px] xl:w-[340px]"
               />
 
               <h2
                 data-couple-name
-                className="font-alex-brush text-[40px] will-change-transform xl:text-[64px] text-center"
+                className="text-center font-alex-brush text-[clamp(2.25rem,5.5vw,4rem)] will-change-transform"
               >
                 Devi Risma Anggraeni
               </h2>
 
               <p
                 data-couple-desc
-                className="text-center font-eb-garamond text-sm will-change-transform xl:text-base"
+                className="max-w-[18rem] text-center font-eb-garamond text-sm leading-relaxed will-change-transform sm:max-w-[22rem] sm:text-base lg:max-w-[26rem] lg:text-[1.125rem]"
               >
                 Putri dari
                 <br />
@@ -323,32 +326,35 @@ export default function Couple() {
                 rel="noopener noreferrer"
                 className="relative will-change-transform"
               >
-                <span className="absolute top-1/2 right-1/2 flex translate-x-1/2 -translate-y-[60%] items-center gap-2 text-[24px] xl:top-1/2 xl:-translate-y-[65%]">
+                <span className="absolute top-1/2 right-1/2 flex translate-x-1/2 -translate-y-[60%] items-center gap-1.5 sm:gap-2 lg:-translate-y-[65%]">
                   <Image
-                    src="/images/icon-ig.png"
+                    src="/images/icon-ig.webp"
                     alt="ig-icon"
                     width={32}
                     height={32}
+                    className="h-5 w-5 sm:h-6 sm:w-6 lg:h-8 lg:w-8"
                   />
-                  <span className="text-base xl:text-xl">@devirisma22</span>
+                  <span className="text-sm sm:text-base lg:text-xl">
+                    @devirisma22
+                  </span>
                 </span>
 
                 <Image
-                  src="/images/frame-social.png"
+                  src="/images/frame-social.webp"
                   alt="mini-frame"
                   width={360}
                   height={102}
-                  className="h-auto w-[301px] xl:w-[360px]"
+                  className="h-auto w-[250px] sm:w-[301px] lg:w-[330px] xl:w-[360px]"
                 />
               </a>
             </div>
           </div>
 
           {/* AMPERSAND */}
-          <div className="xl:self-center xl:flex xl:items-center xl:justify-center xl:px-6 xl:-translate-y-[150%]">
+          <div className="xl:flex xl:self-center xl:items-center xl:justify-center xl:px-6 xl:-translate-y-[150%]">
             <span
               ref={ampersandRef}
-              className="font-alegreya text-[40px] will-change-transform xl:text-[80px]"
+              className="font-alegreya text-[clamp(2.5rem,5vw,5rem)] will-change-transform"
             >
               &
             </span>
@@ -356,10 +362,13 @@ export default function Couple() {
 
           {/* RIGHT / GROOM */}
           <div className="flex w-full flex-col justify-center xl:w-1/2">
-            <div ref={groomPhotoRef}>
+            <div
+              ref={groomPhotoRef}
+              className="mx-auto w-full max-w-[18rem] sm:max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] xl:max-w-none"
+            >
               <Image
                 data-couple-photo
-                src="/images/groom-couple.png"
+                src="/images/groom-couple.webp"
                 alt="groom"
                 width={1148}
                 height={1280}
@@ -369,27 +378,27 @@ export default function Couple() {
 
             <div
               ref={groomInfoRef}
-              className="mt-12 flex flex-col items-center justify-center gap-3 xl:mt-14"
+              className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:gap-4 lg:mt-12 xl:mt-14"
             >
               <Image
                 data-couple-mini-frame
-                src="/images/mini-frame.png"
+                src="/images/mini-frame.webp"
                 alt="mini-frame"
                 width={340}
                 height={28}
-                className="h-auto w-[196px] will-change-transform xl:w-[340px]"
+                className="h-auto w-[168px] will-change-transform sm:w-[196px] lg:w-[260px] xl:w-[340px]"
               />
 
               <h2
                 data-couple-name
-                className="font-alex-brush text-[40px] will-change-transform xl:text-[64px] text-center"
+                className="text-center font-alex-brush text-[clamp(2.25rem,5.5vw,4rem)] will-change-transform"
               >
                 Gema Adi Perwira
               </h2>
 
               <p
                 data-couple-desc
-                className="text-center font-eb-garamond text-sm will-change-transform xl:text-base"
+                className="max-w-[18rem] text-center font-eb-garamond text-sm leading-relaxed will-change-transform sm:max-w-[22rem] sm:text-base lg:max-w-[26rem] lg:text-[1.125rem]"
               >
                 Putra dari
                 <br />
@@ -403,22 +412,25 @@ export default function Couple() {
                 rel="noopener noreferrer"
                 className="relative will-change-transform"
               >
-                <span className="absolute top-1/2 right-1/2 flex translate-x-1/2 -translate-y-[60%] items-center gap-2 text-[24px] xl:top-1/2 xl:-translate-y-[65%]">
+                <span className="absolute top-1/2 right-1/2 flex translate-x-1/2 -translate-y-[60%] items-center gap-1.5 sm:gap-2 lg:-translate-y-[65%]">
                   <Image
-                    src="/images/icon-ig.png"
+                    src="/images/icon-ig.webp"
                     alt="ig-icon"
                     width={32}
                     height={32}
+                    className="h-5 w-5 sm:h-6 sm:w-6 lg:h-8 lg:w-8"
                   />
-                  <span className="text-base xl:text-xl">@adiiperwira</span>
+                  <span className="text-sm sm:text-base lg:text-xl">
+                    @adiiperwira
+                  </span>
                 </span>
 
                 <Image
-                  src="/images/frame-social.png"
+                  src="/images/frame-social.webp"
                   alt="mini-frame"
                   width={360}
                   height={102}
-                  className="h-auto w-[301px] xl:w-[360px]"
+                  className="h-auto w-[250px] sm:w-[301px] lg:w-[330px] xl:w-[360px]"
                 />
               </a>
             </div>

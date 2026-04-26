@@ -42,7 +42,7 @@ export default function Wrapper({
       <Hero />
       <div className="bg-primary w-full h-full relative">
         <Image
-          src="/images/bg-event.png"
+          src="/images/bg-event.webp"
           alt="Hero Background"
           width={1710}
           height={2280}
