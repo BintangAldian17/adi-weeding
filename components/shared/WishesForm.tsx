@@ -52,7 +52,7 @@ export default function WishesForm({
           <div className="flex w-full flex-col items-center gap-6 md:px-10 xl:px-20">
             <h2
               data-wishes-form-anim
-              className="font-alex-brush text-[40px] leading-none xl:text-[72px]"
+              className="font-alex-brush text-[40px] leading-none xl:text-[72px] text-center"
             >
               Tulis Doa & Harapanmu
             </h2>
