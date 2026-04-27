@@ -18,15 +18,21 @@ export async function createWishes(formData: FormData) {
     throw new Error("Nama, kehadiran, dan ucapan wajib diisi.");
   }
 
-  const { error } = await supabase.from("wishes").insert({
-    user_id: userId,
-    name,
-    message,
-    present,
-  });
+  const { data, error } = await supabase
+    .from("wishes")
+    .insert({
+      user_id: userId,
+      name,
+      message,
+      present,
+    })
+    .select("id, name, message, present")
+    .single();
   if (error) throw error;
 
   if (path) {
     revalidatePath(path);
   }
+
+  return data;
 }

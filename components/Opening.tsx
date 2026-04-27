@@ -14,16 +14,10 @@ export default function Opening({
   guestName,
   guestId,
   initialWishes,
-  initialPage,
-  totalPages,
-  totalWishes,
 }: {
   guestName: string;
   guestId: string;
   initialWishes: WishItem[];
-  initialPage: number;
-  totalPages: number;
-  totalWishes: number;
 }) {
   useScrollToTop();
 
@@ -73,9 +67,6 @@ export default function Opening({
           <Wrapper
             guestId={guestId}
             initialWishes={initialWishes}
-            initialPage={initialPage}
-            totalPages={totalPages}
-            totalWishes={totalWishes}
           />
         </div>
       </OpenContext.Provider>

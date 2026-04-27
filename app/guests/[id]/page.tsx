@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 import Opening from "@/components/Opening";
 import { createClient } from "../../../utils/supabase/server";
-import { getWishes } from "@/lib/actions/getWishes";
+import { getAllWishes } from "@/lib/actions/getWishes";
 
 const siteTitle = "The Wedding of Devi & Adi";
 
@@ -76,18 +76,13 @@ export async function generateMetadata({
 
 export default async function GuestPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ page?: string }>;
 }) {
   const { id } = await params;
-  const { page } = await searchParams;
 
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
-
-  const currentPage = Math.max(1, Number(page) || 1);
 
   const { data, error } = await supabase
     .from("guests")
@@ -99,17 +94,14 @@ export default async function GuestPage({
     notFound();
   }
 
-  const wishesData = await getWishes(currentPage, 8);
+  const wishes = await getAllWishes();
 
   return (
     <main className="h-full w-full bg-primary">
       <Opening
         guestName={data.name}
         guestId={id}
-        initialWishes={wishesData.items}
-        initialPage={wishesData.page}
-        totalPages={wishesData.totalPages}
-        totalWishes={wishesData.total}
+        initialWishes={wishes}
       />
     </main>
   );

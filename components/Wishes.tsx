@@ -3,7 +3,6 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useMemo, useRef, useState } from "react";
 import { createWishes } from "@/lib/actions/createWishes";
 import type { WishItem } from "@/lib/actions/getWishes";
@@ -14,6 +13,8 @@ type PaginationItem =
   | { type: "control"; control: "first" | "prev" | "next" | "last" }
   | { type: "page"; page: number; active: boolean }
   | { type: "ellipsis"; key: string };
+
+const WISHES_PER_PAGE = 8;
 
 function buildPaginationItems(
   currentPage: number,
@@ -75,28 +76,27 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 export default function Wishes({
   guestId,
   initialWishes,
-  initialPage,
-  totalPages,
-  totalWishes,
 }: {
   guestId: string;
   initialWishes: WishItem[];
-  initialPage: number;
-  totalPages: number;
-  totalWishes: number;
 }) {
   const rootRef = useRef<HTMLElement | null>(null);
   const formSectionRef = useRef<HTMLDivElement | null>(null);
   const listSectionRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [present, setPresent] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const hasWishes = totalWishes > 0;
+  const [allWishes, setAllWishes] = useState(initialWishes);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.max(1, Math.ceil(allWishes.length / WISHES_PER_PAGE));
+  const hasWishes = allWishes.length > 0;
+
+  const paginatedWishes = useMemo(() => {
+    const from = (currentPage - 1) * WISHES_PER_PAGE;
+    return allWishes.slice(from, from + WISHES_PER_PAGE);
+  }, [allWishes, currentPage]);
 
   useGSAP(
     () => {
@@ -194,46 +194,36 @@ export default function Wishes({
         );
       }
     },
-    { scope: rootRef, dependencies: [hasWishes, initialPage, totalPages] },
+    { scope: rootRef, dependencies: [hasWishes, currentPage, totalPages] },
   );
 
   const paginationItems = useMemo(
-    () => buildPaginationItems(initialPage, totalPages),
-    [initialPage, totalPages],
+    () => buildPaginationItems(currentPage, totalPages),
+    [currentPage, totalPages],
   );
 
   const handlePaginationClick = (item: PaginationItem) => {
     if (item.type === "ellipsis") return;
 
-    let nextPage = initialPage;
+    let nextPage = currentPage;
 
     if (item.type === "page") {
       nextPage = item.page;
     } else if (item.control === "first") {
       nextPage = 1;
     } else if (item.control === "prev") {
-      nextPage = Math.max(1, initialPage - 1);
+      nextPage = Math.max(1, currentPage - 1);
     } else if (item.control === "next") {
-      nextPage = Math.min(totalPages, initialPage + 1);
+      nextPage = Math.min(totalPages, currentPage + 1);
     } else {
       nextPage = totalPages;
     }
 
-    if (nextPage === initialPage) {
+    if (nextPage === currentPage) {
       return;
     }
 
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (nextPage <= 1) {
-      params.delete("page");
-    } else {
-      params.set("page", String(nextPage));
-    }
-
-    router.push(
-      params.toString() ? `${pathname}?${params.toString()}` : pathname,
-    );
+    setCurrentPage(nextPage);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -255,19 +245,16 @@ export default function Wishes({
     formData.set("message", trimmedMessage);
     formData.set("present", String(present));
     formData.set("user_id", guestId);
-    formData.set("path", pathname);
 
     try {
-      await createWishes(formData);
+      const createdWish = await createWishes(formData);
       setName("");
       setMessage("");
       setPresent(true);
-
-      if (searchParams.get("page")) {
-        router.replace(pathname);
-      }
-
-      router.refresh();
+      setAllWishes((prev) =>
+        createdWish ? [createdWish, ...prev] : prev,
+      );
+      setCurrentPage(1);
     } catch (error) {
       console.error(error);
       setErrorMessage("Ucapan belum bisa dikirim. Coba lagi sebentar.");
@@ -297,10 +284,10 @@ export default function Wishes({
       {hasWishes ? (
         <div ref={listSectionRef}>
           <WishesMessagesSection
-            wishes={initialWishes}
+            wishes={paginatedWishes}
             totalPages={totalPages}
             paginationItems={paginationItems}
-            currentPage={initialPage}
+            currentPage={currentPage}
             onPaginationClick={handlePaginationClick}
           />
         </div>

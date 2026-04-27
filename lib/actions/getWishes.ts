@@ -39,3 +39,19 @@ export async function getWishes(page = 1, limit = 8) {
     limit: safeLimit,
   };
 }
+
+export async function getAllWishes() {
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data, error } = await supabase
+    .from("wishes")
+    .select("id, name, message, present")
+    .order("id", { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+
+  return (data ?? []) as WishItem[];
+}

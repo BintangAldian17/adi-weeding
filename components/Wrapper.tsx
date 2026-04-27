@@ -16,15 +16,9 @@ import Wishes from "./Wishes";
 export default function Wrapper({
   guestId,
   initialWishes,
-  initialPage,
-  totalPages,
-  totalWishes,
 }: {
   guestId: string;
   initialWishes: WishItem[];
-  initialPage: number;
-  totalPages: number;
-  totalWishes: number;
 }) {
   useEffect(() => {
     // Refresh lagi setelah semua gambar load
@@ -64,9 +58,6 @@ export default function Wrapper({
       <Wishes
         guestId={guestId}
         initialWishes={initialWishes}
-        initialPage={initialPage}
-        totalPages={totalPages}
-        totalWishes={totalWishes}
       />
       <Closing />
     </>
