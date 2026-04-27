@@ -10,7 +10,7 @@ import { copyToClipboard } from "@/utils/copyToClipboard";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const ACCOUNT_NUMBER = "0113306464";
+const ACCOUNT_NUMBER = "7140948378";
 
 export default function Gift() {
   const rootRef = useRef<HTMLElement | null>(null);
@@ -233,9 +233,9 @@ export default function Gift() {
           data-gift-desc
           className="max-w-[19rem] text-center text-sm leading-relaxed will-change-transform sm:max-w-[28rem] sm:text-base lg:max-w-[44rem] lg:text-[1.375rem] xl:max-w-[58rem] xl:text-[32px] xl:leading-[1.35]"
         >
-          Your blessing and coming to our wedding are enough for us. However, if
-          you want to give a gift we provide a Digital Envelope to make it
-          easier for you. thank you
+          Doa restu Anda merupakan karunia terindah bagi kami. Namun, bagi
+          Bapak/Ibu/Saudara/i yang ingin memberikan tanda kasih, dapat melalui
+          saluran berikut ini. Terima kasih atas segala kebaikan Anda.
         </p>
 
         {/* ENVELOPE */}
@@ -262,7 +262,7 @@ export default function Gift() {
 
             <div className="mt-1.5 text-center text-[10px] sm:mt-2 sm:text-sm lg:text-[1.375rem] xl:text-[32px]">
               <div className="flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3">
-                <p className="font-bold leading-none">BCA - {ACCOUNT_NUMBER}</p>
+                <p className="font-bold leading-none">BSI - {ACCOUNT_NUMBER}</p>
                 <span className="flex size-4 items-center justify-center rounded-full bg-secondary transition-transform sm:size-5 lg:size-7 xl:size-9">
                   <Icon
                     icon={copied ? "mdi:check" : "mdi:content-copy"}

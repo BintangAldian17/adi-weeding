@@ -148,7 +148,7 @@ export default function Quote() {
             data-quote-ornament
             className="will-change-transform text-sm sm:text-base lg:text-2xl xl:text-[32px]"
           >
-            Lorem Ipsum
+            Potret Kami
           </span>
 
           <Image

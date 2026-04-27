@@ -274,13 +274,14 @@ export default function Event() {
         },
       });
 
-      dateTl.to(topFrames, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 1.1,
-        stagger: 0.1,
-      })
+      dateTl
+        .to(topFrames, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.1,
+          stagger: 0.1,
+        })
         .to(
           staticNumbers,
           {
@@ -408,8 +409,7 @@ export default function Event() {
             stagger: 0.08,
           },
           "-=0.9",
-        )
-        ;
+        );
     },
     { scope: rootRef },
   );
@@ -487,16 +487,15 @@ export default function Event() {
             data-event-header="main"
             className="text-center font-alex-brush text-[clamp(2.5rem,7vw,5.5rem)] will-change-transform"
           >
-            Save The Date
+            Simpan Tanggalnya
           </h2>
 
           <p
             data-event-desc="main"
             className="px-6 pt-5 text-center text-sm leading-relaxed will-change-transform sm:px-12 sm:text-base lg:px-0 lg:pt-10 lg:text-[1.375rem] xl:pt-[72px] xl:text-[32px] xl:leading-[1.35]"
           >
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry&apos;s standard dummy text
-            ever since the
+            Dengan penuh rasa syukur kepada Allah SWT, kami mengundang
+            Bapak/Ibu/Saudara/i untuk menghadiri pernikahan putra-putri kami:
           </p>
         </div>
 

@@ -49,18 +49,19 @@ export default function WishesForm({
         />
         <div className="absolute inset-0 h-full w-full bg-white opacity-[2%]" />
         <div className="flex items-center justify-center pt-10 text-secondary xl:mt-28">
-          <div className="flex w-full flex-col items-center gap-6">
+          <div className="flex w-full flex-col items-center gap-6 md:px-10 xl:px-20">
             <h2
               data-wishes-form-anim
               className="font-alex-brush text-[40px] leading-none xl:text-[72px]"
             >
-              Write your wishes
+              Tulis Doa & Harapanmu
             </h2>
             <p
               data-wishes-form-anim
               className="text-center text-base leading-none xl:text-2xl"
             >
-              Every wish and prayer from you is the most beautiful gift for us.
+              Setiap ucapan dan doamu adalah hadiah terbaik dan terindah bagi
+              kami.
             </p>
             <form
               onSubmit={onSubmit}
@@ -84,6 +85,7 @@ export default function WishesForm({
                 <input
                   name="name"
                   value={name}
+                  maxLength={50}
                   onChange={(event) => onNameChange(event.target.value)}
                   className="h-[37px] w-full rounded-[5px] border border-secondary px-2 text-sm text-secondary focus:outline-none focus:ring-0"
                   placeholder="Nama"
@@ -117,13 +119,13 @@ export default function WishesForm({
                 />
                 <div className="relative z-10">
                   <span className="absolute right-2 bottom-2 opacity-50 z-10">
-                    {message.length}/140
+                    {message.length}/255
                   </span>
                   <textarea
                     name="message"
                     value={message}
                     placeholder="Tulis Ucapan & Doa"
-                    maxLength={140}
+                    maxLength={255}
                     onChange={(event) => onMessageChange(event.target.value)}
                     className="h-[101px] py-2 w-full resize-none rounded-[5px] border border-secondary px-2 text-sm text-secondary focus:outline-none focus:ring-0"
                   />

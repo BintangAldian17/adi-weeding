@@ -43,9 +43,9 @@ export default function EnvelopeMessage({
         </p>
       )}
       {from && (
-        <span className="absolute bottom-6 left-4 text-secondary text-xs">
+        <p className="absolute bottom-6 left-4 text-secondary text-xs overflow-hidden whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
           From: {from} {present ? "(Hadir)" : "(Tidak Hadir)"}
-        </span>
+        </p>
       )}
     </div>
   );

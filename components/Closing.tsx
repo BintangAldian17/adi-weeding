@@ -285,16 +285,15 @@ export default function Closing() {
           data-closing-title
           className="text-center font-alex-brush text-[clamp(2.5rem,7vw,5.5rem)] leading-none will-change-transform"
         >
-          Thank you
+          Terima Kasih
         </h2>
 
         <p
           data-closing-desc
           className="mt-8 max-w-[19rem] text-center text-sm leading-relaxed will-change-transform sm:max-w-[24rem] sm:text-base md:max-w-[32rem] lg:max-w-[36rem] lg:text-[1.125rem] xl:mt-10 xl:max-w-[52rem] xl:text-[32px] xl:leading-[1.35]"
         >
-          We would like to express our gratitude for your presence and prayers
-          in this special moment of ours. We hope that you will be willing to
-          attend and enjoy the entire series of our events.
+          Kehadiran Anda adalah saksi dari janji suci kami. Terima kasih telah
+          menjadi bagian dari cerita indah yang kami mulai hari ini.
         </p>
 
         <Image

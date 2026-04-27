@@ -117,17 +117,17 @@ export default function Gallery() {
             data-gallery-title
             className="font-alex-brush text-[clamp(2.5rem,7vw,5.5rem)] will-change-transform"
           >
-            Potraits of Us
+            Cerita Kami
           </h2>
 
           <p
             data-gallery-desc
             className="max-w-[20rem] text-center text-sm leading-relaxed will-change-transform sm:max-w-[30rem] sm:text-base lg:max-w-[44rem] lg:text-[1.375rem] xl:max-w-[58rem] xl:text-[32px] xl:leading-[1.35]"
           >
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry&apos;s standard dummy
-            text ever since the 1500s, when an unknown printer took a galley of
-            type and scrambled it to make a type specimen book.
+            Berawal dari sebuah pertemuan di SMA, Allah SWT menuntun langkah
+            kami untuk saling mengenal. Kini, setelah melewati ribuan detik dan
+            cerita, kami memilih untuk merangkai sisa usia bersama dalam ikatan
+            suci pernikahan.
           </p>
 
           <div className="flex h-full w-full items-center justify-center">
