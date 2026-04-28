@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/all";
 import Wishes from "./Wishes";
+import Footer from "./Footer";
 
 export default function Wrapper({
   guestId,
@@ -55,11 +56,9 @@ export default function Wrapper({
       <Gallery />
       <Event />
       <Gift />
-      <Wishes
-        guestId={guestId}
-        initialWishes={initialWishes}
-      />
+      <Wishes guestId={guestId} initialWishes={initialWishes} />
       <Closing />
+      <Footer />
     </>
   );
 }
