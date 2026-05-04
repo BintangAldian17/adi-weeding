@@ -133,8 +133,8 @@ export default function Cover({
               Dear,
             </p>
 
-            <div className="text-center">
-              <h2 className="mb-4 text-lg md:text-[32px] leading-none">
+            <div className="flex flex-col items-center justify-center">
+              <h2 className="mb-4 text-lg md:text-[32px] leading-none text-center">
                 {guestName}
               </h2>
 
